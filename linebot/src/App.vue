@@ -65,6 +65,7 @@
       <div slot="emptystate">
         データは存在しません
       </div>
+
       <template
         slot="table-row"
         slot-scope="props"
@@ -73,13 +74,27 @@
           v-if="props.column.field == 'Images'"
           class="image-container"
         >
-          <img
+          <div
             v-for="(imageUrl,index) in props.row.Images"
             :key="index"
-            :src="imageUrl"
-            class="image"
-            @click="largeImage(props.row.LineID)"
           >
+            <img
+              :src="imageUrl"
+              class="image"
+              @click="largeImage(props.row.LineID, index, props.row.Images)"
+            >
+          </div>
+        </div>
+
+        <div
+          v-if="props.column.field == 'Status'"
+        >
+          <span v-if="props.row.Status === 0"> 未返信 </span>
+          <span v-else> 返信済み </span>
+        </div>
+
+        <div v-else>
+          {{ props.formattedRow[props.column.field] }}
         </div>
       </template>
     </vue-good-table>
@@ -135,6 +150,9 @@ export default {
     this.getTodos()
   },
   methods: {
+    largeImage(id, index) {
+      alert(`${id}:${index}`)
+    },
     async createLineRequests() {
       const { LineID, LineUserName, Images, Status } = this
       if (!LineID || !LineUserName) return
@@ -167,6 +185,9 @@ export default {
   width: 80px;
   height: 80px;
   margin: 0 5px;
+}
+.image-container {
+  display: flex;
 }
   .pink {
     background: rgba(202, 127, 141, 0.1);
