@@ -37,7 +37,6 @@
       :columns="columns"
       :rows="todos"
       :row-style-class="rowStyleClassFn"
-      :fixed-header="true"
       :search-options="{
         enabled: true,
         placeholder: 'キーワードを入力してデーターを検索する',
@@ -48,7 +47,7 @@
       }"
       :pagination-options="{
         enabled: true,
-        mode: 'records',
+        mode: 'pages',
         perPage: 5,
         position: 'top',
         perPageDropdown: [3, 5, 7],
@@ -61,7 +60,29 @@
         pageLabel: 'page',
         allLabel: '全て',
       }"
-    />
+      compact-mode
+    >
+      <div slot="emptystate">
+        データは存在しません
+      </div>
+      <template
+        slot="table-row"
+        slot-scope="props"
+      >
+        <div
+          v-if="props.column.field == 'Images'"
+          class="image-container"
+        >
+          <img
+            v-for="(imageUrl,index) in props.row.Images"
+            :key="index"
+            :src="imageUrl"
+            class="image"
+            @click="largeImage(props.row.LineID)"
+          >
+        </div>
+      </template>
+    </vue-good-table>
   </div>
 </template>
 
@@ -87,22 +108,25 @@ export default {
         {
           label: 'LineID',
           field: 'LineID',
-          type: 'number'
+          type: 'number',
+          width: '130px'
         },
         {
           label: 'ユーザー名',
           field: 'LineUserName',
-          type: 'string'
+          type: 'string',
+          width: '130px'
         },
         {
           label: '画像',
           field: 'Images',
-          type: 'array'
+          type: 'array',
         },
         {
           label: 'ステータス',
           field: 'Status',
-          type: 'number'
+          type: 'number',
+          width: '130px'
         },
       ],
     }
@@ -139,18 +163,18 @@ export default {
 }
 </script>
 <style>
+.image{
+  width: 80px;
+  height: 80px;
+  margin: 0 5px;
+}
   .pink {
     background: rgba(202, 127, 141, 0.1);
   }
 
   .blue {
-     width: 100%;
      background: rgba(150,170,194, 0.2);
      padding: 20px 15px 30px 10px;
-     text-align: center;
-     display: flex;
-     justify-content: space-evenly;
-     align-items: center;
   }
 
   /*价格搜索input框*/
@@ -159,7 +183,6 @@ input, button {
             outline: none;
         }
 .tl-price-input{
-    width: auto;
     border: 1px solid #ccc;
     padding: 7px 0;
     background: #F4F4F7;
