@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-linebot-dev-85322-authRole",
+      "UnauthRoleArn": "arn:aws:iam::699085892706:role/amplify-linebot-dev-85322-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::699085892706:role/amplify-linebot-dev-85322-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-linebot-dev-85322-deployment",
+      "UnauthRoleName": "amplify-linebot-dev-85322-unauthRole",
+      "StackName": "amplify-linebot-dev-85322",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:699085892706:stack/amplify-linebot-dev-85322/ee663350-1ef8-11eb-95dd-0e15809eb2fa",
+      "AmplifyAppId": "d1jy1vdomwnad5"
+    }
+  }
+}

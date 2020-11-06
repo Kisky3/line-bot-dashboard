@@ -1,0 +1,5 @@
+{
+    "AppSyncApiName": "linebot",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false
+}

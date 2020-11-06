@@ -1,0 +1,8 @@
+type LineBotRequests @model {
+  LineID: ID!
+  LineUserName: String!
+  Images: [String]
+  Status: Int
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
