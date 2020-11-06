@@ -87,7 +87,7 @@
         </div>
 
         <div
-          v-if="props.column.field == 'Status'"
+          v-else-if="props.column.field == 'Status'"
         >
           <span v-if="props.row.Status === 0"> 未返信 </span>
           <span v-else> 返信済み </span>
