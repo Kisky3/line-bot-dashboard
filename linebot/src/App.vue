@@ -8,6 +8,7 @@
     <button v-on:click="createLineRequests">Create Line Requests</button>
     <div v-for="item in todos" :key="item.LineID">
       <p>LineID: {{ item.LineID }}   ユーザー名:{{ item.LineUserName }}    画像：{{ item.Images }}  ステータス：{{ item.Status }}</p>
+    <button class="btn btn-primary">test</button>
     </div>
   </div>
 </template>
