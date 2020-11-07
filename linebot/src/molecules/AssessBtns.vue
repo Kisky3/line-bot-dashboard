@@ -22,14 +22,10 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "AssessBtns",
-  data(){
-    return {
-    }
-  },
+  props:['sendstatus'],
   methods: {
     setAssessStatus(status) {
-      this.$emit("sendAssessStatus",
-      {status} )
+      this.sendstatus(status);
     },
   }
 });

@@ -50,20 +50,7 @@
               @click="largeImage(props.row.LineID, index, props.row.Images)"
             >
           </div>
-          <div class="">
-            <button class="m-1">
-              買取不明
-            </button>
-            <button class="m-1">
-              買取不可
-            </button>
-            <button class="m-1">
-              高くフォームを送信
-            </button>
-            <button class="m-1">
-              おいくらフォームを送信
-            </button>
-          </div>
+          <assess-btns :sendstatus="sendAssessStatus(props.row.id)" />
         </div>
 
         <div
@@ -83,11 +70,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import { VueGoodTable } from 'vue-good-table';
+import AssessBtns from '../molecules/AssessBtns.vue';
 
 export default Vue.extend({
   name: 'RequestTable',
   components: {
-    VueGoodTable
+    VueGoodTable,
+    AssessBtns
   },
   props: ['todos'],
   data() {
@@ -138,6 +127,10 @@ export default Vue.extend({
     },
     getTodos(){
        this.$emit('gettodos');
+    },
+    sendAssessStatus:(id) => (status) => {
+      console.log("hh");
+      console.log(id, status)
     }
   }
 })
