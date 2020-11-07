@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="">
+    <div>
       <button
         class="m-1"
         @click="setAssessStatus('unknown')"
@@ -34,7 +34,6 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "AssessBtns",
-  props:['sendstatus'],
   methods: {
     setAssessStatus(status) {
       this.sendstatus(status);

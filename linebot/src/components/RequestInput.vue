@@ -1,42 +1,41 @@
 <template>
-    <div class="blue">
-      <input
-        v-model="LineID"
-        type="text"
-        placeholder="LineID"
-        class="tl-price-input"
-      >
-      <input
-        v-model="LineUserName"
-        type="text"
-        placeholder="ユーザー名"
-        class="tl-price-input"
-      >
-      <input
-        v-model="Images"
-        type="text"
-        placeholder="画像リスト"
-        class="tl-price-input"
-      >
-      <input
-        v-model="Status"
-        type="text"
-        placeholder="ステータス"
-        class="tl-price-input"
-      >
-      <button
-        class="btn btn-primary"
-        @click="createLineRequests"
-      >
-        テスト依頼を作成
-      </button>
-    </div>
+  <div class="blue">
+    <input
+      v-model="LineID"
+      type="text"
+      placeholder="LineID"
+      class="tl-price-input"
+    >
+    <input
+      v-model="LineUserName"
+      type="text"
+      placeholder="ユーザー名"
+      class="tl-price-input"
+    >
+    <input
+      v-model="Images"
+      type="text"
+      placeholder="画像リスト"
+      class="tl-price-input"
+    >
+    <input
+      v-model="Status"
+      type="text"
+      placeholder="ステータス"
+      class="tl-price-input"
+    >
+    <button
+      class="btn btn-primary"
+      @click="createLineRequests"
+    >
+      テスト依頼を作成
+    </button>
+  </div>
 </template>
 
 <script>
 export default {
     name: 'RequestInput',
-    props: ['onCreated'],
     data() {
         return {
         LineID: '',
@@ -52,7 +51,6 @@ export default {
         this.$emit('request', {
             LineID, LineUserName, Images, Status
         });
-        // how to wait for submit success?
         this.LineID = '';
         this.LineUserName = '';
         this.Images = [];
