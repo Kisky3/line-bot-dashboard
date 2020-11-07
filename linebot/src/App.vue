@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <h1>Line Bot Dashboard</h1>
-    <div class="blue">
+    <router-view/>
+    <!-- <div class="blue">
       <input
         v-model="LineID"
         type="text"
@@ -32,172 +32,22 @@
       >
         テスト依頼を作成
       </button>
-    </div>
-    <vue-good-table
-      :columns="columns"
-      :rows="todos"
-      :row-style-class="rowStyleClassFn"
-      :search-options="{
-        enabled: true,
-        placeholder: 'キーワードを入力してデーターを検索する',
-      }"
-      :sort-options="{
-        enabled: false,
-        initialSortBy: {field: 'Status', type: 'asc'}
-      }"
-      :pagination-options="{
-        enabled: true,
-        mode: 'pages',
-        perPage: 5,
-        position: 'top',
-        perPageDropdown: [3, 5, 7],
-        dropdownAllowAll: true,
-        setCurrentPage: 1,
-        nextLabel: '次のページへ',
-        prevLabel: '前のページへ',
-        rowsPerPageLabel: '表示される依頼件数を変更',
-        ofLabel: '/',
-        pageLabel: 'page',
-        allLabel: '全て',
-      }"
-      compact-mode
-    >
-      <div slot="emptystate">
-        データは存在しません
-      </div>
-
-      <template
-        slot="table-row"
-        slot-scope="props"
-      >
-        <div
-          v-if="props.column.field == 'Images'"
-          class="image-container"
-        >
-          <div class="image-content">
-            <img
-              v-for="(imageUrl,index) in props.row.Images"
-              :key="index"
-              :src="imageUrl"
-              class="image"
-              @click="largeImage(props.row.LineID, index, props.row.Images)"
-            >
-          </div>
-          <div class="">
-            <button class="m-1">
-              買取不明
-            </button>
-            <button class="m-1">
-              買取不可
-            </button>
-            <button class="m-1">
-              高くフォームを送信
-            </button>
-            <button class="m-1">
-              おいくらフォームを送信
-            </button>
-          </div>
-        </div>
-
-        <div
-          v-else-if="props.column.field == 'Status'"
-        >
-          <span v-if="props.row.Status === 0"> 未返信 </span>
-          <span v-else> 返信済み </span>
-        </div>
-
-        <div v-else>
-          {{ props.formattedRow[props.column.field] }}
-        </div>
-      </template>
-    </vue-good-table>
+    </div> -->
   </div>
 </template>
 
 <script>
-import { API } from 'aws-amplify'
-import { createLineBotRequests } from './graphql/mutations'
-import { listLineBotRequestss } from './graphql/queries'
-import { VueGoodTable } from 'vue-good-table';
 
 export default {
   name: 'App',
-  components:{
-    VueGoodTable
-  },
   data() {
     return {
       LineID: '',
       LineUserName: '',
       Images: [],
       Status: null,
-      todos: [],
-      columns: [
-        {
-          label: 'id',
-          field: 'id',
-          type: 'number',
-          hidden: true
-        },
-        {
-          label: 'LineID',
-          field: 'LineID',
-          type: 'string',
-          width: '130px'
-        },
-        {
-          label: 'ユーザー名',
-          field: 'LineUserName',
-          type: 'string',
-          width: '130px'
-        },
-        {
-          label: '画像',
-          field: 'Images',
-          type: 'array',
-          width: '530px'
-        },
-        {
-          label: 'ステータス',
-          field: 'Status',
-          type: 'number',
-          width: '230px'
-        },
-      ],
     }
   },
-  async created() {
-    this.getTodos()
-  },
-  methods: {
-    largeImage(id, index) {
-      alert(`${id}:${index}`)
-    },
-    async createLineRequests() {
-      const { LineID, LineUserName, Images, Status } = this
-      if (!LineID || !LineUserName) return
-      const todo = { LineID, LineUserName, Images, Status}
-      this.todos = [...this.todos, todo]
-      await API.graphql({
-        query: createLineBotRequests,
-        variables: {input: todo},
-      })
-      this.LineID = ''
-      this.LineUserName = ''
-      this.Images = ''
-      this.Status = ''
-    },
-    rowStyleClassFn(row) {
-    return row.Status === 0 ? 'pink' : '';
-    },
-    async getTodos() {
-      const todos = await API.graphql({
-        query: listLineBotRequestss
-      })
-      const dataList = todos.data
-      this.todos = dataList.listLineBotRequestss.items
-    }
-  }
 }
 </script>
 <style>

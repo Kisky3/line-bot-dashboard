@@ -15,7 +15,8 @@
     "bootstrap-vue": "^2.18.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.12",
-    "vue-good-table": "^2.21.1"
+    "vue-good-table": "^2.21.1",
+    "vue-router": "^3.4.9"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
