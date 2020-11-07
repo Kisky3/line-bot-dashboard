@@ -34,20 +34,13 @@
       </div>
       <template
         slot="table-row"
-           slot-scope="props">
+        slot-scope="props"
+      >
         <div
           v-if="props.column.field == 'Images'"
-          class="image-container">
-            <image-container :props="props"/>
-          <div class="image-content">
-            <img
-              v-for="(imageUrl,index) in props.row.Images"
-              :key="index"
-              :src="imageUrl"
-              class="image"
-              @click="largeImage(props.row.LineID, index, props.row.Images)"
-            >
-          </div>
+          class="image-container"
+        >
+          <image-container :props="props" />
           <assess-btns :sendstatus="sendAssessStatus(props.row.id)" />
         </div>
 
@@ -119,9 +112,6 @@ export default Vue.extend({
     this.getTodos()
   },
   methods: {
-    largeImage(id, index) {
-      alert(`${id}:${index}`)
-    },
     rowStyleClassFn(row) {
       return row.Status === 0 ? 'pink' : '';
     },
@@ -129,8 +119,10 @@ export default Vue.extend({
        this.$emit('gettodos');
     },
     sendAssessStatus:(id) => (status) => {
-      // console.log("hh");
-      // console.log(id, status)
+      // eslint-disable-next-line
+      console.log("hh");
+      // eslint-disable-next-line
+      console.log(id, status)
     }
   }
 })
