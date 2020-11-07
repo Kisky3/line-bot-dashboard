@@ -74,15 +74,28 @@
           v-if="props.column.field == 'Images'"
           class="image-container"
         >
-          <div
-            v-for="(imageUrl,index) in props.row.Images"
-            :key="index"
-          >
+          <div class="image-content">
             <img
+              v-for="(imageUrl,index) in props.row.Images"
+              :key="index"
               :src="imageUrl"
               class="image"
               @click="largeImage(props.row.LineID, index, props.row.Images)"
             >
+          </div>
+          <div class="">
+            <button class="m-1">
+              買取不明
+            </button>
+            <button class="m-1">
+              買取不可
+            </button>
+            <button class="m-1">
+              高くフォームを送信
+            </button>
+            <button class="m-1">
+              おいくらフォームを送信
+            </button>
           </div>
         </div>
 
@@ -121,9 +134,15 @@ export default {
       todos: [],
       columns: [
         {
+          label: 'id',
+          field: 'id',
+          type: 'number',
+          hidden: true
+        },
+        {
           label: 'LineID',
           field: 'LineID',
-          type: 'number',
+          type: 'string',
           width: '130px'
         },
         {
@@ -136,12 +155,13 @@ export default {
           label: '画像',
           field: 'Images',
           type: 'array',
+          width: '530px'
         },
         {
           label: 'ステータス',
           field: 'Status',
           type: 'number',
-          width: '130px'
+          width: '230px'
         },
       ],
     }
@@ -188,6 +208,14 @@ export default {
 }
 .image-container {
   display: flex;
+  flex-direction: column;
+}
+.m-1 {
+  width: 100%;
+}
+.image-content {
+  display: flex;
+  flex-direction: row !important;
 }
   .pink {
     background: rgba(202, 127, 141, 0.1);
