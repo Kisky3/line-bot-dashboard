@@ -32,15 +32,13 @@
       <div slot="emptystate">
         データは存在しません
       </div>
-
       <template
         slot="table-row"
-        slot-scope="props"
-      >
+           slot-scope="props">
         <div
           v-if="props.column.field == 'Images'"
-          class="image-container"
-        >
+          class="image-container">
+            <image-container :props="props"/>
           <div class="image-content">
             <img
               v-for="(imageUrl,index) in props.row.Images"
@@ -71,12 +69,14 @@
 import Vue from 'vue'
 import { VueGoodTable } from 'vue-good-table';
 import AssessBtns from '../molecules/AssessBtns.vue';
+import ImageContainer from '../molecules/ImageContainer.vue';
 
 export default Vue.extend({
   name: 'RequestTable',
   components: {
     VueGoodTable,
-    AssessBtns
+    AssessBtns,
+    ImageContainer
   },
   props: ['todos'],
   data() {
@@ -129,8 +129,8 @@ export default Vue.extend({
        this.$emit('gettodos');
     },
     sendAssessStatus:(id) => (status) => {
-      console.log("hh");
-      console.log(id, status)
+      // console.log("hh");
+      // console.log(id, status)
     }
   }
 })

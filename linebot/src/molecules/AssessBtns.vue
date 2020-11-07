@@ -1,16 +1,28 @@
 <template>
   <div>
     <div class="">
-      <button class="m-1" @click="setAssessStatus('unknown')">
+      <button
+        class="m-1"
+        @click="setAssessStatus('unknown')"
+      >
         買取不明
       </button>
-      <button class="m-1"  @click="setAssessStatus('notAvailable')">
+      <button
+        class="m-1"
+        @click="setAssessStatus('notAvailable')"
+      >
         買取不可
       </button>
-      <button class="m-1"  @click="setAssessStatus('sendTakaku')">
+      <button
+        class="m-1"
+        @click="setAssessStatus('sendTakaku')"
+      >
         高くフォームを送信
       </button>
-      <button class="m-1"  @click="setAssessStatus('sendOikura')">
+      <button
+        class="m-1"
+        @click="setAssessStatus('sendOikura')"
+      >
         おいくらフォームを送信
       </button>
     </div>

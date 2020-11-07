@@ -57,9 +57,7 @@ export default {
         this.LineUserName = '';
         this.Images = [];
         this.Status = '';
-
     },
-
     }
 
 }
