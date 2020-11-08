@@ -6,21 +6,33 @@
         :key="index"
         :src="imageUrl"
         class="image"
-        @click="largeImage(props.row.LineID, index, props.row.Images)"
+        @click="largeImage(index)"
       >
     </div>
+    <images-slide :showImageSlide="showImageSlide" :id="props.row.LineID" :index="index" :images="props.row.Images" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import ImagesSlide from '../components/ImagesSlide.vue';
 
 export default Vue.extend({
   name: "ImageContainer",
   props: ['props'],
+  data() {
+    return {
+      showImageSlide: false,
+      index: 0
+    }
+  },
+  components: {
+    ImagesSlide
+  },
   methods: {
-    largeImage(id, index) {
-      alert(`${id}:${index}`)
+    largeImage(index) {
+      this.index = index;
+      this.showImageSlide = true;
     },
   }
 });

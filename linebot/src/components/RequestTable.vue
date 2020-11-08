@@ -3,7 +3,6 @@
     <vue-good-table
       :columns="columns"
       :rows="todos"
-      theme="nocturnal"
       :fixed-header="true"
       styleClass="vgt-table"
       :row-style-class="rowStyleClassFn"
