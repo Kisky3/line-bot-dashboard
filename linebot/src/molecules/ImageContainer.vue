@@ -26,5 +26,15 @@ export default Vue.extend({
 });
 </script>
 <style>
-
+.image{
+  width: 80px;
+  height: 80px;
+  margin: 0 5px;
+  box-shadow:1px 1px 5px #999;
+}
+.image-content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
 </style>

@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="table-container">
     <vue-good-table
       :columns="columns"
       :rows="todos"
+      :fixed-header="true"
       :row-style-class="rowStyleClassFn"
       :search-options="{
         enabled: true,
@@ -76,34 +77,28 @@ export default Vue.extend({
     return {
     columns: [
         {
-          label: 'id',
-          field: 'id',
-          type: 'number',
-          hidden: true
-        },
-        {
           label: 'LineID',
-          field: 'LineID',
+          field: 'id',
           type: 'string',
-          width: '130px'
+          width: '120px'
         },
         {
           label: 'ユーザー名',
           field: 'LineUserName',
           type: 'string',
-          width: '130px'
+          width: '120px'
         },
         {
           label: '画像',
           field: 'Images',
           type: 'array',
-          width: '530px'
+          width: '560px'
         },
         {
           label: 'ステータス',
           field: 'Status',
           type: 'number',
-          width: '230px'
+          width: '120px'
         },
       ],
     }
@@ -127,3 +122,19 @@ export default Vue.extend({
   }
 })
 </script>
+<style>
+.pink {
+  border: solid 2px red!important;
+  background: rgba(200,20,62,0.1);
+}
+  .table-container {
+    margin: auto;
+    max-width: 1210px;
+    margin-top: 100px;
+  }
+  .image-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+</style>
