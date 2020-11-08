@@ -3,7 +3,9 @@
     <vue-good-table
       :columns="columns"
       :rows="todos"
+      theme="nocturnal"
       :fixed-header="true"
+      styleClass="vgt-table"
       :row-style-class="rowStyleClassFn"
       :search-options="{
         enabled: true,
@@ -48,8 +50,8 @@
         <div
           v-else-if="props.column.field == 'Status'"
         >
-          <span v-if="props.row.Status === 0"> 未返信 </span>
-          <span v-else> 返信済み </span>
+          <div class="status-label red" v-if="props.row.Status === 0"> 未返信 </div>
+          <div class="status-label green" v-else> 返信済み </div>
         </div>
         <div v-else>
           {{ props.formattedRow[props.column.field] }}
@@ -92,7 +94,7 @@ export default Vue.extend({
           label: '画像',
           field: 'Images',
           type: 'array',
-          width: '560px'
+          width: '580px'
         },
         {
           label: 'ステータス',
@@ -124,17 +126,36 @@ export default Vue.extend({
 </script>
 <style>
 .pink {
-  border: solid 2px red!important;
   background: rgba(200,20,62,0.1);
 }
   .table-container {
     margin: auto;
     max-width: 1210px;
-    margin-top: 100px;
+    margin-top: 30px;
   }
   .image-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.status-label {
+  width: 80px;
+  height: 30px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+.status-label.red {
+  background: Crimson;
+}
+
+.status-label.green {
+  background: cadetblue;
+}
+
+.vgt-table {
+  background: black;
 }
 </style>

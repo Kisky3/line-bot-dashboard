@@ -2,33 +2,29 @@
   <div>
     <div class="c-btn-container">
       <div class="c-btn-content">
-        <button
-       class="c-arrow-btn"
-        @click="setAssessStatus('unknown')"
+      <b-button size="sm" variant="dark" class="btn"
+      @click="setAssessStatus('unknown')"
       >
         買取不明
-      </button>
-      <button
-       class="c-arrow-btn"
+      </b-button>
+       <b-button size="sm" variant="dark" class="btn"
         @click="setAssessStatus('notAvailable')"
       >
         買取不可
-      </button>
+      </b-button>
       </div>
 
- <div class="c-btn-content">
-      <button
-       class="c-arrow-btn"
+      <div class="c-btn-content">
+        <b-button size="sm" variant="warning" class="btn"
         @click="setAssessStatus('sendTakaku')"
       >
         高くフォームを送信
-      </button>
-      <button
-       class="c-arrow-btn"
+      </b-button>
+        <b-button size="sm" variant="warning" class="btn"
         @click="setAssessStatus('sendOikura')"
       >
         おいくらフォームを送信
-      </button>
+      </b-button>
       </div>
     </div>
   </div>
@@ -58,25 +54,13 @@ export default Vue.extend({
     justify-content: flex-start;
     flex-direction: row;
   }
-  .c-arrow-btn {
-  position: relative;
-  width: 200px;
-  background: linear-gradient(#ff9b27, #fb7150);
-  color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  height: 32px;
-  border: none;
-  margin: 0 10px 10px;
-  border-radius: 15px;
-}
+ .btn {
+   margin: 5px 10px;
+   width: 200px;
+   border-radius: 15px;
+ }
 
-.color .red    {background: #fa5a5a;}
-.color .yellow {background: #f5c516 ;}
-.color .green  {background: #82c8a0;}
-.color .cyan   {background: #f39103;}
-.color .blue   {background: #6698cb;}
-.color .purple {background: #cb99c5;}
-
-.btn-gradient.green:active  {background: #72B08E;}
+ .btn:hover {
+   opacity: 0.7;
+ }
 </style>

@@ -65,6 +65,7 @@ export default {
  .table-container {
     margin: auto;
     max-width: 1200px;
+    margin-top: 100px
   }
  /*价格搜索input框*/
 input, button {

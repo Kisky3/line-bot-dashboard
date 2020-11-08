@@ -1,9 +1,9 @@
 <template>
   <header>
     <div class="c-logo-container">
-      <a :href="'https://www.' + domainName + '.com/'">
+      <a href="./">
         <img
-          src="../assets/bot.png"
+          src="../assets/bot1.png"
           class="c-logo-takaku"
           alt="高く売れるドットコムロゴ"
         />
@@ -31,15 +31,18 @@ export default Vue.extend({
 <style>
   h1 {
    font-family: "Franklin Gothic Medium";
-   margin-left: 50px;
+   margin-left: 20px;
+   color: white;
+   text-decoration: none;
   }
   header {
   position: fixed;
+  padding-top: 10px;
+  background: #343a40;
   top: 0;
   left: 0;
   width: 100%;
-  height: 65px;
-  background: #ffffff;
+  height: 70px;
   border-bottom: 1px solid #f0f0f0;
   display: flex;
   justify-items: center;
