@@ -13,19 +13,11 @@
   </header>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'Header',
-  data() {
-    return {
-    }
-  },
-  created() {
-  },
-  methods: {
-  }
+  name: 'Header'
 })
 </script>
 <style>

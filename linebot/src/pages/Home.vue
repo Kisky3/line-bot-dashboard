@@ -2,6 +2,7 @@
   <div>
     <!-- <request-input @request="createLineRequests" /> -->
     <number-block-container :allNumber="allNumber" :replied="replied" :unreplied="unreplied" />
+    <logout />
     <request-table @gettodos="getTodos" :todos="todos"/>
     <loading :showLoading="showLoading"/>
   </div>
@@ -16,6 +17,7 @@ import { createLineBotRequests } from '../graphql/mutations'
 import { listLineBotRequestss } from '../graphql/queries'
 import NumberBlockContainer from '../components/NumberBlockContainer.vue'
 import Loading from '../components/Loading.vue'
+import Logout from '../components/Logout.vue'
 
 export default Vue.extend({
   name: 'Home',
@@ -23,7 +25,8 @@ export default Vue.extend({
     RequestTable,
     // RequestInput,
     NumberBlockContainer,
-    Loading
+    Loading,
+    Logout
   },
   data(){
     return {

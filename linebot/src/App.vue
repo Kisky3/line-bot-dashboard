@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
+    <amplify-authenticator>
     <router-view/>
+    </amplify-authenticator>
   </div>
 </template>
 
