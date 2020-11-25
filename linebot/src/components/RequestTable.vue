@@ -43,7 +43,10 @@
             <b-icon icon="exclamation-circle-fill" variant="danger" class="space"></b-icon
             >未返信
           </div>
-          <div class="status-label green" v-else>返信済み</div>
+          <div class="status-label green" v-else>
+             <b-icon icon="patch-check-fll" variant="info" class="space"></b-icon>
+            返信済み
+          </div>
         </div>
         <div v-else>{{ props.formattedRow[props.column.field] }}</div>
       </template>
@@ -149,7 +152,7 @@ export default Vue.extend({
   flex-direction: row;
   justify-content: space-between;
   border-radius: 5px;
-  border: dashed 2px gainsboro;
+  border: dotted 3px gainsboro;
 }
 .status-label {
   width: 80px;
@@ -159,6 +162,7 @@ export default Vue.extend({
   justify-content: center;
   align-items: center;
   margin: auto;
+  white-space:nowrap;
 }
 .status-label.red {
   font-size: 18px;

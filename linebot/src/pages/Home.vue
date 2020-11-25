@@ -90,5 +90,6 @@ export default Vue.extend({
   align-items: center;
   flex-direction: row;
   margin-bottom:  -10px;
+  background: #343a40;
 }
 </style>

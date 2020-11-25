@@ -7,8 +7,15 @@
       yellow: color === 'yellow'
     }"
   >
-    <label>{{ label }}</label>
-    <p class="number">{{ number }}</p>
+    <label>
+      <b-icon v-if="color === 'red'" icon="exclamation-circle" class="space"></b-icon>
+      <b-icon v-if="color === 'green'" icon="patch-check" class="space"></b-icon>
+      <b-icon v-if="color === 'yellow'" icon="file-text" class="space"></b-icon>
+      {{ label }}
+    </label>
+    <p class="number">
+      {{ number }}
+    </p>
   </div>
 </template>
 
@@ -24,15 +31,15 @@ export default Vue.extend({
 label {
   background: rgba(0, 0, 0, 0.2);
   width: 100%;
-  height: 30px;
-  margin-top: -13px;
+  height: 40px;
+  margin-top: -35px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .number-block {
   width: 220px;
-  height: 40px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
