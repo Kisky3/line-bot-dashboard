@@ -1,6 +1,5 @@
 <template>
   <div v-if="showImageSlide">
-     {{ index }}
     <b-carousel
       id="carousel-1"
       v-model="slide"
