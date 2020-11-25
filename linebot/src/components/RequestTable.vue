@@ -35,16 +35,24 @@
       <template slot="table-row" slot-scope="props">
         <div v-if="props.column.field == 'Images'" class="image-container">
           <image-container :props="props" @largeImage="largeImage" />
-          <assess-btns :sendstatus="sendAssessStatus(props.row.id)" />
+          <assess-btns :id="props.row.id" @showAlert="openAlert" :disabled="props.row.Status !== 0"/>
         </div>
 
         <div v-else-if="props.column.field == 'Status'">
           <div class="status-label red" v-if="props.row.Status === 0">
-            <b-icon icon="exclamation-circle-fill" variant="danger" class="space"></b-icon
+            <b-icon
+              icon="exclamation-circle-fill"
+              variant="danger"
+              class="space"
+            ></b-icon
             >未返信
           </div>
           <div class="status-label green" v-else>
-             <b-icon icon="patch-check-fll" variant="info" class="space"></b-icon>
+            <b-icon
+              icon="patch-check-fll"
+              variant="info"
+              class="space"
+            ></b-icon>
             返信済み
           </div>
         </div>
@@ -60,6 +68,22 @@
       :num="num"
       :images="props.row.Images"
     />
+    <!--送信前のステータスチェックアラート-->
+      <div class="mask" v-if="showAlert" @click="closeAlert"></div>
+      <b-alert :show="showAlert" class="alert" variant="danger">
+        <b-icon
+        icon="x-square-fill"
+        variant="danger"
+        class="close-btn"
+        @click="closeAlert"
+      ></b-icon>
+        <h4 class="alert-heading">エラーが発生しました。</h4>
+        <hr />
+        <p class="mb-3">
+          この依頼は全て誰か返信してしまいましたため、再返信はできません。
+        </p>
+        <p class="mb-3">画面をリロードして、未返信の依頼を対応してください。</p>
+      </b-alert>
   </div>
 </template>
 
@@ -84,6 +108,7 @@ export default Vue.extend({
       showImageSlide: false,
       num: 0,
       props: null,
+      showAlert: false,
       columns: [
         {
           label: "LineID",
@@ -116,6 +141,14 @@ export default Vue.extend({
     this.getTodos();
   },
   methods: {
+    openAlert(){
+      this.showAlert = true
+    },
+    closeAlert() {
+      this.showAlert = false
+      // 画面リロードする
+      this.$router.go(0);
+    },
     closeImageSlide() {
       this.showImageSlide = false;
     },
@@ -130,18 +163,30 @@ export default Vue.extend({
     getTodos() {
       this.$emit("gettodos");
     },
-    sendAssessStatus: (id) => (status) => {
-      // eslint-disable-next-line
-      console.log("hh");
-      // eslint-disable-next-line
-      console.log(id, status);
-    }
   }
 });
 </script>
 <style>
+.mask {
+  background-color:none;
+  opacity: 0.3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
 .info {
   background: #dcdcdc4f;
+}
+.alert {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  border: solid 1px #ccc;
+  z-index: 1000;
 }
 .table-container {
   margin: 30px;
@@ -162,7 +207,7 @@ export default Vue.extend({
   justify-content: center;
   align-items: center;
   margin: auto;
-  white-space:nowrap;
+  white-space: nowrap;
 }
 .status-label.red {
   font-size: 18px;

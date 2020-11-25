@@ -1,9 +1,7 @@
 <template>
   <div class="loading-container" v-if="showLoading">
     <div class="loading-content">
-      <div class="spinner-border text-info" role="status">
-        <div class="spinner-grow text-info" role="status" />
-      </div>
+      <div class="spinner-border text-info" role="status" />
       <p>Loading...</p>
     </div>
   </div>
@@ -39,5 +37,10 @@ export default Vue.extend({
   font-size: 30px;
   color: white;
   margin-top: 5px;
+}
+
+.spinner-border {
+  width: 100px;
+  height: 100px;
 }
 </style>
