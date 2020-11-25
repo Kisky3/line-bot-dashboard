@@ -14,20 +14,20 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
-  name: 'Header'
-})
+  name: "Header"
+});
 </script>
 <style>
-  h1 {
-   font-family: "Franklin Gothic Medium";
-   margin-left: 20px;
-   color: gainsboro;
-   text-decoration: none;
-  }
-  header {
+h1 {
+  font-family: "Franklin Gothic Medium";
+  margin-left: 20px;
+  color: gainsboro;
+  text-decoration: none;
+}
+header {
   position: fixed;
   padding-top: 10px;
   background: white;

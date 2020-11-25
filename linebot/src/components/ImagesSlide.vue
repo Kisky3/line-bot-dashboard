@@ -1,20 +1,31 @@
 <template>
-  <div v-if="showImageSlide" class="dialog">
-    <b-carousel
-      id="carousel-1"
-      v-model="slide"
-      :interval="4000"
-      :no-hover-pause='false'
-      controls
-      indicators
-      background="#ababab"
-      style="text-shadow: 1px 1px 2px #333;"
-    >
-    <div v-for="(img) in images"
-      :key="img">
-      <b-carousel-slide :img-src="img" style="width: 700px; height: 550px;"></b-carousel-slide>
+  <div>
+    <div class="mask" v-if="showImageSlide" @click="controlSlide"></div>
+    <div v-if="showImageSlide" class="dialog">
+      <b-icon
+        icon="x-square-fill"
+        variant="danger"
+        class="close-btn"
+        @click="controlSlide"
+      ></b-icon>
+      <b-carousel
+        id="carousel-1"
+        v-model="slide"
+        :interval="4000"
+        :no-hover-pause="false"
+        controls
+        indicators
+        background="#ababab"
+        style="text-shadow: 1px 1px 2px #333;"
+      >
+        <div v-for="img in images" :key="img">
+          <b-carousel-slide
+            :img-src="img"
+            style="width: 800px; height: 800px; object-fit: cover;"
+          ></b-carousel-slide>
+        </div>
+      </b-carousel>
     </div>
-    </b-carousel>
   </div>
 </template>
 
@@ -27,30 +38,54 @@ export default Vue.extend({
   data() {
     return {
       slide: 0,
-      sliding: null,
+      sliding: null
     };
   },
-  watch:{
-    index(val){
-      this.slide = val
+  watch: {
+    index(val) {
+      this.slide = val;
     }
   },
+  methods: {
+    controlSlide() {
+      this.showImageSlide = false;
+    }
+  }
 });
 </script>
 <style>
- .dialog {
-     position: absolute;
-     left: 50%;
-     top: 50%;
-     transform: translate(-50%,-50%);
-     border: solid 1px #ccc;
-     background: #ccc;
-     z-index: 1000;
- }
+.mask {
+  background-color: rgba(0,0,0,0.6);
+  opacity: 0.3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+.dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 1px #ccc;
+  background: #ccc;
+  z-index: 1000;
+}
 
- .carousel-control-prev-icon, .carousel-control-next-icon {
-   color: white;
-   width: 50px;
-   height: 50px;
- }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.close-btn {
+  color: red;
+  font-size: 40px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1001;
+}
 </style>
