@@ -3,7 +3,7 @@
     <div class="c-logo-container">
       <a href="./">
         <img
-          src="../assets/bot1.png"
+          src="../assets/bot3.png"
           class="c-logo-takaku"
           alt="高く売れるドットコムロゴ"
         />
@@ -24,13 +24,13 @@ export default Vue.extend({
   h1 {
    font-family: "Franklin Gothic Medium";
    margin-left: 20px;
-   color: white;
+   color: gainsboro;
    text-decoration: none;
   }
   header {
   position: fixed;
   padding-top: 10px;
-  background: #343a40;
+  background: white;
   top: 0;
   left: 0;
   width: 100%;

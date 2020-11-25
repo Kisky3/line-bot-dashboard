@@ -6,6 +6,9 @@
      ようこそ！ {{username}} 様
    </div>
    <amplify-sign-out />
+   <b-button variant="outline-info" class="mb-2">
+      <b-icon icon="power" aria-hidden="true"></b-icon> Logout
+   </b-button>
   </div>
 </template>
 
@@ -42,5 +45,11 @@ export default Vue.extend({
   color:cadetblue;
   font-size: 16px;
   font-weight: bold;
+}
+
+:root {
+    --amplify-primary-color: #ff6347;
+    --amplify-primary-tint: #ff7359;
+    --amplify-primary-shade: #e0573e;
 }
 </style>
