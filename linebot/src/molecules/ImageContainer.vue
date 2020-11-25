@@ -9,7 +9,7 @@
         @click="largeImage(index)"
       >
     </div>
-    <images-slide :showImageSlide="showImageSlide" :id="props.row.LineID" :index="index" :images="props.row.Images" />
+    <images-slide :showImageSlide="showImageSlide" :id="props.row.LineID" :index="num" :images="props.row.Images" />
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default Vue.extend({
   data() {
     return {
       showImageSlide: false,
-      index: 0
+      num: 0
     }
   },
   components: {
@@ -31,7 +31,7 @@ export default Vue.extend({
   },
   methods: {
     largeImage(index) {
-      this.index = index;
+      this.num = index;
       this.showImageSlide = true;
     },
   }

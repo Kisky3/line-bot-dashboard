@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div v-if="showImageSlide">
+     {{ index }}
     <b-carousel
       id="carousel-1"
       v-model="slide"
@@ -10,12 +11,9 @@
       img-width="1024"
       img-height="480"
       style="text-shadow: 1px 1px 2px #333;"
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd"
     >
-    <div  v-for="(img, index) in images"
-      :key="index">
-       <!-- Slides with image only -->
+    <div v-for="(img) in images"
+      :key="img">
       <b-carousel-slide :img-src="img"></b-carousel-slide>
     </div>
     </b-carousel>
@@ -32,8 +30,12 @@ export default Vue.extend({
     return {
       slide: 0,
       sliding: null,
-      imageUrl: this.images[this.index]
     };
+  },
+  watch:{
+    index(val){
+      this.slide = val
+    }
   },
   methods: {
   }
