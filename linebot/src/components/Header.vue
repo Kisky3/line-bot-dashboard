@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header v-if="showHeader">
     <div class="c-logo-container">
       <a href="./">
         <img
@@ -17,7 +17,31 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "Header"
+  name: "Header",
+  data() {
+    return {
+      i: 0,
+      showHeader: true
+    };
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll, true);
+  },
+  methods: {
+    handleScroll() {
+      const scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      const scroll = scrollTop - this.i;
+      this.i = scrollTop;
+      if (scroll < 0) {
+        this.showHeader = true
+      } else {
+       this.showHeader = false
+      }
+    }
+  }
 });
 </script>
 <style>

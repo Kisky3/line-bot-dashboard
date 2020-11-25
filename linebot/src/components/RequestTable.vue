@@ -17,7 +17,7 @@
       :pagination-options="{
         enabled: true,
         mode: 'pages',
-        perPage: 15,
+        perPage: 7,
         position: 'top',
         perPageDropdown: [3, 5, 7],
         dropdownAllowAll: true,
@@ -85,13 +85,13 @@ export default Vue.extend({
           label: "LineID",
           field: "id",
           type: "string",
-          width: "120px"
+          width: "150px"
         },
         {
           label: "ユーザー名",
           field: "LineUserName",
           type: "string",
-          width: "120px"
+          width: "150px"
         },
         {
           label: "画像",
@@ -103,7 +103,7 @@ export default Vue.extend({
           label: "ステータス",
           field: "Status",
           type: "number",
-          width: "120px"
+          width: "150px"
         }
       ]
     };
