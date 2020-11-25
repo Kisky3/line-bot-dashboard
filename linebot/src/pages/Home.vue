@@ -1,8 +1,10 @@
 <template>
   <div>
     <!-- <request-input @request="createLineRequests" /> -->
+    <div class="top-container">
     <number-block-container :allNumber="allNumber" :replied="replied" :unreplied="unreplied" />
     <logout />
+    </div>
     <request-table @gettodos="getTodos" :todos="todos"/>
     <loading :showLoading="showLoading"/>
   </div>
@@ -77,5 +79,10 @@ export default Vue.extend({
   .blue {
      background: rgba(220,20,60, 0.6);
      padding: 20px 15px 30px 10px;
+  }
+  .top-container {
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
   }
 </style>

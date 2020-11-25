@@ -1,8 +1,11 @@
 <template>
   <div class='number-block-container'
   >
-   <p>ようこそ {{username}} 様</p>
-   <amplify-sign-out/>
+   <div class="number-block-title">
+     <b-icon icon="person-circle"></b-icon>
+     ようこそ！ {{username}} 様
+   </div>
+   <amplify-sign-out />
   </div>
 </template>
 
@@ -33,5 +36,11 @@ export default Vue.extend({
  margin: auto;
  margin-top: 100px;
  max-width: 1210px;
+}
+
+.number-block-title {
+  color:cadetblue;
+  font-size: 16px;
+  font-weight: bold;
 }
 </style>

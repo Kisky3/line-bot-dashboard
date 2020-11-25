@@ -17,7 +17,7 @@
       :pagination-options="{
         enabled: true,
         mode: 'pages',
-        perPage: 5,
+        perPage: 15,
         position: 'top',
         perPageDropdown: [3, 5, 7],
         dropdownAllowAll: true,
@@ -128,9 +128,7 @@ export default Vue.extend({
   background: rgba(200,20,62,0.1);
 }
   .table-container {
-    margin: auto;
-    max-width: 1210px;
-    margin-top: 30px;
+    margin: 30px;
   }
   .image-container {
   display: flex;
