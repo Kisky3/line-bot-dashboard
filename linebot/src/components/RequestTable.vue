@@ -149,7 +149,7 @@ export default Vue.extend({
   flex-direction: row;
   justify-content: space-between;
   border-radius: 5px;
-  border: dotted 1px gainsboro;
+  border: dashed 2px gainsboro;
 }
 .status-label {
   width: 80px;

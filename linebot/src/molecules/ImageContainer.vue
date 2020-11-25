@@ -33,7 +33,14 @@ export default Vue.extend({
   margin: 0 15px;
   object-fit: cover;
   box-shadow: 1px 1px 5px #999;
+  cursor: pointer;
 }
+
+.image:hover {
+  border: solid 1px gainsboro;
+  opacity: 0.8;
+}
+
 .image-content {
   display: flex;
   justify-content: space-between;
