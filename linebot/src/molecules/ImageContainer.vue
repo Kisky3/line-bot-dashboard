@@ -18,7 +18,6 @@ import Vue from "vue";
 export default Vue.extend({
   name: "ImageContainer",
   props: ["props"],
-  data() {},
   methods: {
     largeImage(index, props) {
       this.$emit("largeImage", index, props);

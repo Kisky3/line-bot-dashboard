@@ -50,10 +50,11 @@
     </vue-good-table>
     <!--画像のスライド-->
     <images-slide
+      @controlSlide="closeImageSlide"
       v-if="props && showImageSlide"
       :showImageSlide="showImageSlide"
       :id="props.row.LineID"
-      :index="num"
+      :num="num"
       :images="props.row.Images"
     />
   </div>
@@ -111,21 +112,13 @@ export default Vue.extend({
   async created() {
     this.getTodos();
   },
-  watch: {
-    num(val) {
-      this.num = val;
-    },
-    props(val) {
-      this.props = val;
-    }
-  },
   methods: {
     closeImageSlide() {
       this.showImageSlide = false;
     },
-    largeImage(index, props) {
+    largeImage(num, props) {
       this.props = props;
-      this.num = index;
+      this.num = num;
       this.showImageSlide = true;
     },
     rowStyleClassFn(row) {

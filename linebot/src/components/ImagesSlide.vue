@@ -34,21 +34,16 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "ImagesSlide",
-  props: ["showImageSlide", "id", "index", "images"],
+  props: ["showImageSlide", "id", "num", "images"],
   data() {
     return {
-      slide: 0,
+      slide: this.num,
       sliding: null
     };
   },
-  watch: {
-    index(val) {
-      this.slide = val;
-    }
-  },
   methods: {
     controlSlide() {
-      this.showImageSlide = false;
+      this.$emit("controlSlide");
     }
   }
 });
