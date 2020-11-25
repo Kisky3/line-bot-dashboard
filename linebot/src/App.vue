@@ -23,6 +23,7 @@ export default Vue.extend({
 <style ls="scss">
 html, body {
   font-family: "arial black";
+  font-size: 15px;
 }
 
 </style>

@@ -86,7 +86,9 @@ export default Vue.extend({
 }
 .top-container {
   display: flex;
-  justify-content: start;
+  justify-content:center;
+  align-items: center;
   flex-direction: row;
+  margin-bottom:  -10px;
 }
 </style>

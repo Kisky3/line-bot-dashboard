@@ -40,7 +40,7 @@
 
         <div v-else-if="props.column.field == 'Status'">
           <div class="status-label red" v-if="props.row.Status === 0">
-            <b-icon icon="exclamation-circle-fill" variant="danger"></b-icon
+            <b-icon icon="exclamation-circle-fill" variant="danger" class="space"></b-icon
             >未返信
           </div>
           <div class="status-label green" v-else>返信済み</div>
@@ -181,5 +181,9 @@ export default Vue.extend({
 
 .vgt-table {
   background: black;
+}
+
+.space {
+  margin-right: 5px;
 }
 </style>
