@@ -2,13 +2,13 @@
   <div class='number-block-container'
   >
    <div class="number-block-title">
-     <b-icon icon="person-circle"></b-icon>
-     ようこそ！ {{username}} 様
+     <p><b-icon icon="emoji-sunglasses" ont-scale="15"></b-icon>ようこそ！</p>
+     <p>{{username}}</p>
    </div>
    <amplify-sign-out />
-   <b-button variant="outline-info" class="mb-2">
+   <!-- <b-button variant="outline-info" class="mb-2">
       <b-icon icon="power" aria-hidden="true"></b-icon> Logout
-   </b-button>
+   </b-button> -->
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default Vue.extend({
       username: ''
     }
   },
-  async beforeCreate() {
+  async mounted() {
     // Auth.currentAuthenticatedUser()でユーザ情報を取得する。
     // 取得できなければ認証ステータスをfalseに設定する
       const cognitoUser = await Auth.currentAuthenticatedUser()
@@ -42,14 +42,9 @@ export default Vue.extend({
 }
 
 .number-block-title {
-  color:cadetblue;
+  color:#17A2B8;
   font-size: 16px;
   font-weight: bold;
-}
-
-:root {
-    --amplify-primary-color: #ff6347;
-    --amplify-primary-tint: #ff7359;
-    --amplify-primary-shade: #e0573e;
+  margin-right: 20px;
 }
 </style>

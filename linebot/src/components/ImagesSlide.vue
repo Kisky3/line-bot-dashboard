@@ -12,7 +12,7 @@
     >
     <div v-for="(img) in images"
       :key="img">
-      <b-carousel-slide :img-src="img" style="width: 800px; height: 800px;"></b-carousel-slide>
+      <b-carousel-slide :img-src="img" style="width: 700px; height: 550px;"></b-carousel-slide>
     </div>
     </b-carousel>
   </div>
@@ -42,9 +42,10 @@ export default Vue.extend({
      position: absolute;
      left: 50%;
      top: 50%;
-     transform: translate(-100%,-50%);
+     transform: translate(-50%,-50%);
      border: solid 1px #ccc;
      background: #ccc;
+     z-index: 1000;
  }
 
  .carousel-control-prev-icon, .carousel-control-next-icon {

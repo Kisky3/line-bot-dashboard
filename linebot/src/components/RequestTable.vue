@@ -42,21 +42,27 @@
           v-if="props.column.field == 'Images'"
           class="image-container"
         >
-          <image-container :props="props" />
+          <image-container :props="props" @largeImage="largeImage"/>
           <assess-btns :sendstatus="sendAssessStatus(props.row.id)" />
         </div>
 
         <div
           v-else-if="props.column.field == 'Status'"
         >
-          <div class="status-label red" v-if="props.row.Status === 0"> 未返信 </div>
-          <div class="status-label green" v-else> 返信済み </div>
+          <div class="status-label red" v-if="props.row.Status === 0">
+            <b-icon icon="exclamation-circle-fill" variant="danger"></b-icon>
+            未返信
+          </div>
+          <div class="status-label green" v-else>
+            返信済み
+          </div>
         </div>
         <div v-else>
           {{ props.formattedRow[props.column.field] }}
         </div>
       </template>
     </vue-good-table>
+    <images-slide v-if="props" :showImageSlide="showImageSlide" :id="props.row.LineID" :index="num" :images="props.row.Images" />
   </div>
 </template>
 
@@ -65,17 +71,22 @@ import Vue from 'vue'
 import { VueGoodTable } from 'vue-good-table';
 import AssessBtns from '../molecules/AssessBtns.vue';
 import ImageContainer from '../molecules/ImageContainer.vue';
+import ImagesSlide from '../components/ImagesSlide.vue';
 
 export default Vue.extend({
   name: 'RequestTable',
   components: {
     VueGoodTable,
     AssessBtns,
-    ImageContainer
+    ImageContainer,
+    ImagesSlide
   },
   props: ['todos'],
   data() {
     return {
+    showImageSlide: false,
+    num: 0,
+    props: null,
     columns: [
         {
           label: 'LineID',
@@ -107,7 +118,20 @@ export default Vue.extend({
   async created() {
     this.getTodos()
   },
+  watch:{
+    num(val){
+      this.num = val
+    },
+    props(val){
+      this.props = val
+    },
+  },
   methods: {
+    largeImage(index, props) {
+      this.props = props;
+      this.num = index;
+      this.showImageSlide = true;
+    },
     rowStyleClassFn(row) {
       return row.Status === 0 ? 'pink' : '';
     },
@@ -129,6 +153,7 @@ export default Vue.extend({
 }
   .table-container {
     margin: 30px;
+    min-height: 700px;
   }
   .image-container {
   display: flex;
@@ -145,11 +170,17 @@ export default Vue.extend({
   margin: auto;
 }
 .status-label.red {
-  background: Crimson;
+  font-size: 18px;
+  font-weight: bold;
+  color: #dc3545;
+  background: none;
 }
 
 .status-label.green {
-  background: cadetblue;
+  font-size: 18px;
+  font-weight: bold;
+  color: #17A2B8;
+   background: none;
 }
 
 .vgt-table {

@@ -7,7 +7,7 @@
           class="c-logo-takaku"
           alt="高く売れるドットコムロゴ"
         />
-        <h1>LINE BOT DASHBOARD</h1>
+        <h1>TAKAKU BOT DASHBOARD</h1>
       </a>
     </div>
   </header>
@@ -63,8 +63,7 @@ header span {
 
 .c-logo-container a {
   display: flex;
-  max-width: 1200px;
-  margin:auto;
+  margin-left: 30px;
   justify-content: start;
   align-items: center;
   flex-direction: row;

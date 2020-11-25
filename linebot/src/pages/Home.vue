@@ -76,9 +76,6 @@ export default Vue.extend({
 })
 </script>
 <style>
-  .body {
-    background: gainsboro;
-  }
   .blue {
      background: rgba(220,20,60, 0.6);
      padding: 20px 15px 30px 10px;

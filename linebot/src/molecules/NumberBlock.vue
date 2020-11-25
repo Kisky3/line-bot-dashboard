@@ -43,7 +43,7 @@ label {
 }
 
 .green {
-   background: cadetblue;
+   background: #17A2B8;
 }
 
 .yellow {

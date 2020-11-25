@@ -11,6 +11,8 @@
 
 import Vue from "vue";
 import Header from "./components/Header.vue"
+import "./index.scss";
+
 export default Vue.extend({
   name: 'App',
   components:{
@@ -18,8 +20,9 @@ export default Vue.extend({
   }
 })
 </script>
-<style>
+<style ls="scss">
 html, body {
   font-family: "arial black";
 }
+
 </style>
