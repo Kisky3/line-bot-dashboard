@@ -1,12 +1,11 @@
 <template>
-  <div class='number-block-container'
-  >
-   <div class="number-block-title">
-     <p><b-icon icon="emoji-sunglasses" ont-scale="15"></b-icon>ようこそ！</p>
-     <p>{{username}}</p>
-   </div>
-   <amplify-sign-out />
-   <!-- <b-button variant="outline-info" class="mb-2">
+  <div class="number-block-container">
+    <div class="number-block-title">
+      <p><b-icon icon="emoji-sunglasses" ont-scale="15" class="smile-icon"></b-icon>ようこそ！</p>
+      <p>{{ username }}</p>
+    </div>
+    <amplify-sign-out />
+    <!-- <b-button variant="outline-info" class="mb-2">
       <b-icon icon="power" aria-hidden="true"></b-icon> Logout
    </b-button> -->
   </div>
@@ -14,37 +13,43 @@
 
 <script>
 import Vue from "vue";
-import { Auth } from 'aws-amplify'
+import { Auth } from "aws-amplify";
 
 export default Vue.extend({
   name: "Logout",
-  data(){
+  data() {
     return {
-      username: ''
-    }
+      username: ""
+    };
   },
   async mounted() {
     // Auth.currentAuthenticatedUser()でユーザ情報を取得する。
     // 取得できなければ認証ステータスをfalseに設定する
-      const cognitoUser = await Auth.currentAuthenticatedUser()
-      this.username = cognitoUser.username
+    const cognitoUser = await Auth.currentAuthenticatedUser();
+    this.username = cognitoUser.username;
   }
 });
 </script>
 <style>
 .logput-container {
- display: flex;
- justify-content: start;
- align-items: center;
- margin: auto;
- margin-top: 100px;
- max-width: 1210px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin: auto;
+  margin-top: 100px;
+  max-width: 1210px;
 }
 
 .number-block-title {
-  color:#17A2B8;
+  color: #17a2b8;
   font-size: 16px;
   font-weight: bold;
   margin-right: 20px;
 }
+
+.smile-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
 </style>

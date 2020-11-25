@@ -1,13 +1,14 @@
 <template>
   <div>
     <div class="image-content">
+      <b-icon icon="zoom-in" variant="danger" class="space"></b-icon>
       <img
         v-for="(imageUrl, index) in props.row.Images"
         :key="index"
         :src="imageUrl"
         class="image"
         @click="largeImage(index, props)"
-      />
+      >
     </div>
   </div>
 </template>

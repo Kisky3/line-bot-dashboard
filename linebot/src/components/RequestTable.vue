@@ -138,7 +138,7 @@ export default Vue.extend({
 </script>
 <style>
 .info {
-  background: gainsboro;
+  background: #dcdcdc4f;
 }
 .table-container {
   margin: 30px;
@@ -174,9 +174,5 @@ export default Vue.extend({
 
 .vgt-table {
   background: black;
-}
-
-.space {
-  margin-right: 5px;
 }
 </style>
