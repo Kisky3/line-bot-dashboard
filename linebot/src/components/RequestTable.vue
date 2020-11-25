@@ -86,25 +86,25 @@ export default Vue.extend({
           label: "LineID",
           field: "id",
           type: "string",
-          width: "150px"
+          width: "180px"
         },
         {
           label: "ユーザー名",
           field: "LineUserName",
           type: "string",
-          width: "150px"
+          width: "180px"
         },
         {
-          label: "画像",
+          label: "画像 / 査定",
           field: "Images",
           type: "array",
-          width: "580px"
+          width: "380px"
         },
         {
           label: "ステータス",
           field: "Status",
           type: "number",
-          width: "150px"
+          width: "180px"
         }
       ]
     };
@@ -148,6 +148,8 @@ export default Vue.extend({
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border-radius: 5px;
+  border: dotted 1px gainsboro;
 }
 .status-label {
   width: 80px;

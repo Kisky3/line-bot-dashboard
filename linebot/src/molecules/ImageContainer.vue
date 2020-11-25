@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="image-content">
-      <b-icon icon="zoom-in" variant="danger" class="space"></b-icon>
+      <b-icon icon="zoom-in" variant="danger" class="space ex-icon"></b-icon>
       <img
         v-for="(imageUrl, index) in props.row.Images"
         :key="index"
@@ -30,7 +30,7 @@ export default Vue.extend({
 .image {
   width: 80px;
   height: 80px;
-  margin: 0 5px;
+  margin: 0 15px;
   object-fit: cover;
   box-shadow: 1px 1px 5px #999;
 }
@@ -38,5 +38,10 @@ export default Vue.extend({
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+}
+
+.ex-icon {
+  color: #999;
+  margin:0 -5px 0 5px;
 }
 </style>
