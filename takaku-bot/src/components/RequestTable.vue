@@ -95,7 +95,7 @@
     />
     <!--送信前のステータスチェックアラート-->
     <div class="mask" v-if="showAlert" @click="closeAlert"></div>
-    <b-alert :show="showAlert" class="alert" variant="danger">
+    <b-alert :show="true" class="alert" variant="danger">
       <b-icon
         icon="x-square-fill"
         variant="danger"
@@ -109,6 +109,7 @@
       </p>
       <p class="mb-3">画面をリロードして、未返信の依頼を対応してください。</p>
     </b-alert>
+    <confirm-dialog class="alert"/>
   </div>
 </template>
 
@@ -118,6 +119,7 @@ import { VueGoodTable } from "vue-good-table";
 import AssessBtns from "../molecules/AssessBtns.vue";
 import ImageContainer from "../molecules/ImageContainer.vue";
 import ImagesSlide from "../components/ImagesSlide.vue";
+import ConfirmDialog from "../molecules/ConfirmDialog.vue";
 
 export default Vue.extend({
   name: "RequestTable",
@@ -125,7 +127,8 @@ export default Vue.extend({
     VueGoodTable,
     AssessBtns,
     ImageContainer,
-    ImagesSlide
+    ImagesSlide,
+    ConfirmDialog
   },
   props: ["todos"],
   data() {
