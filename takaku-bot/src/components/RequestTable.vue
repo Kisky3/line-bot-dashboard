@@ -1,5 +1,6 @@
 <template>
   <div class="table-container">
+    <h3>LINE依頼一覧</h3>
     <vue-good-table
       :columns="columns"
       :rows="todos"
@@ -18,7 +19,7 @@
         enabled: true,
         mode: 'pages',
         perPage: 7,
-        position: 'top',
+        position: 'bottom',
         perPageDropdown: [3, 5, 7],
         dropdownAllowAll: true,
         setCurrentPage: 1,
@@ -189,6 +190,7 @@ export default Vue.extend({
   z-index: 1000;
 }
 .table-container {
+  color: #606266;
   margin: 30px;
   min-height: 700px;
 }

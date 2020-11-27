@@ -18,7 +18,7 @@
     }
   },
   "auth": {
-    "takakubot011d151d": {
+    "takakubotfd87c06e": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

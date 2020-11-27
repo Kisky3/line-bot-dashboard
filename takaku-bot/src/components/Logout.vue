@@ -2,7 +2,7 @@
   <div class="number-block-container">
     <div class="number-block-title">
       <p><b-icon icon="emoji-sunglasses" ont-scale="15" class="smile-icon"></b-icon>ようこそ！</p>
-      <p>{{ username }}</p>
+      <p>{{ username }} 様</p>
     </div>
     <amplify-sign-out />
     <!-- <b-button variant="outline-info" class="mb-2">
@@ -42,7 +42,7 @@ export default Vue.extend({
 
 .number-block-title {
   color: #17a2b8;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin-right: 20px;
 }

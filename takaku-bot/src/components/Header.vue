@@ -93,6 +93,10 @@ header span {
   flex-direction: row;
 }
 
+.c-logo-container a:hover {
+  text-decoration: none;
+}
+
 .c-logo-takaku {
   height: 60px;
 }
