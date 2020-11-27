@@ -53,7 +53,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation, Auth } from "aws-amplify";
 import { getLineBotRequest } from "../graphql/queries";
 import { updateLineBotRequest } from "../graphql/mutations";
 
@@ -76,7 +76,7 @@ export default Vue.extend({
         //TODO: Lambda戻り値のチェック
         //Statusを更新する
         if (sendStatus) {
-          this.updateStatus(this.id, status).then(() => {
+          this.updateStatusAndUser(this.id, status).then(() => {
             // 画面リロードする
             this.$router.go(0);
           });
@@ -91,8 +91,10 @@ export default Vue.extend({
       console.log(id + status);
       return;
     },
-    async updateStatus(id, status) {
-      const input = { id, Status: status };
+    async updateStatusAndUser(id, status) {
+      const cognitoUser = await Auth.currentAuthenticatedUser();
+      const email = cognitoUser.attributes.email;
+      const input = { id, Status: status, UserID: email };
       return await API.graphql(
         graphqlOperation(updateLineBotRequest, {
           input
