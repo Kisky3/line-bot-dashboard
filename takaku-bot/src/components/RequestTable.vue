@@ -1,6 +1,6 @@
 <template>
   <div class="table-container">
-    <h3>LINE依頼一覧</h3>
+    <h5>依頼一覧</h5>
     <vue-good-table
       :columns="columns"
       :rows="todos"
@@ -215,7 +215,7 @@ export default Vue.extend({
 }
 .table-container {
   color: #606266;
-  margin: 50px;
+  margin: 40px;
   min-height: 700px;
   min-width: 1200px;
 }

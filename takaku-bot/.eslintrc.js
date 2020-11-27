@@ -11,7 +11,7 @@ module.exports = {
   ],
   rules: {
     "arrow-body-style": "error",
-    "arrow-parens": "error",
+    "arrow-parens": "always",
     "arrow-spacing": "error",
     "generator-star-spacing": "error",
     "no-duplicate-imports": "error",

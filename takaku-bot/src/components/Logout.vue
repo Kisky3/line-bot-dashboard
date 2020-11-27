@@ -1,17 +1,21 @@
 <template>
   <div class="number-block-container">
     <div class="number-block-title">
-      <b-icon icon="emoji-sunglasses" ont-scale="15" class="smile-icon"></b-icon>
+      <b-icon
+        icon="emoji-sunglasses"
+        ont-scale="15"
+        class="smile-icon"
+      ></b-icon>
       ようこそ！ {{ username }} 様
     </div>
-    <amplify-sign-out />
-    <b-button variant="outline-info" class="mb-2">
-      <b-icon icon="power" aria-hidden="true"></b-icon>Logout
+    <b-button variant="outline-info" class="mb-2" @click="onSignOutClick">
+      <b-icon icon="power" aria-hidden="true"></b-icon>
+      Logout
     </b-button>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from "vue";
 import { Auth } from "aws-amplify";
 
@@ -27,8 +31,11 @@ export default Vue.extend({
     // 取得できなければ認証ステータスをfalseに設定する
     const cognitoUser = await Auth.currentAuthenticatedUser();
     this.username = cognitoUser.username;
-    // eslint-disable-next-line
-    console.log(cognitoUser)
+  },
+  methods: {
+    async onSignOutClick() {
+      await Auth.signOut().then();
+    }
   }
 });
 </script>
@@ -52,5 +59,9 @@ export default Vue.extend({
 .smile-icon {
   font-size: 20px;
   margin-right: 10px;
+}
+
+.btn:hover {
+  opacity: 1;
 }
 </style>
