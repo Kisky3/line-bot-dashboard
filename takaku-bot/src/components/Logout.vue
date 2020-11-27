@@ -34,7 +34,7 @@ export default Vue.extend({
   },
   methods: {
     async onSignOutClick() {
-      await Auth.signOut().then();
+      await Auth.signOut();
     }
   }
 });
