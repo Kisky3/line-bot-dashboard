@@ -19,7 +19,7 @@ import Vue from "vue";
 import RequestTable from "../components/RequestTable.vue";
 // import RequestInput from '../components/RequestInput.vue'
 import { API } from "aws-amplify";
-import { createLineBotRequests } from "../graphql/mutations";
+import { createLineBotRequest } from "../graphql/mutations";
 import { listLineBotRequests } from "../graphql/queries";
 import NumberBlockContainer from "../components/NumberBlockContainer.vue";
 import Loading from "../components/Loading.vue";
@@ -63,7 +63,7 @@ export default Vue.extend({
       this.todos = [...this.todos, todo];
       this.caculateRequestNumbers(this.todos);
       await API.graphql({
-        query: createLineBotRequests,
+        query: createLineBotRequest,
         variables: { input: todo }
       });
       this.LineID = "";

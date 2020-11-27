@@ -1,13 +1,13 @@
 <template>
   <div class="number-block-container">
     <div class="number-block-title">
-      <p><b-icon icon="emoji-sunglasses" ont-scale="15" class="smile-icon"></b-icon>ようこそ！</p>
-      <p>{{ username }} 様</p>
+      <b-icon icon="emoji-sunglasses" ont-scale="15" class="smile-icon"></b-icon>
+      ようこそ！ {{ username }} 様
     </div>
     <amplify-sign-out />
-    <!-- <b-button variant="outline-info" class="mb-2">
-      <b-icon icon="power" aria-hidden="true"></b-icon> Logout
-   </b-button> -->
+    <b-button variant="outline-info" class="mb-2">
+      <b-icon icon="power" aria-hidden="true"></b-icon>Logout
+    </b-button>
   </div>
 </template>
 
@@ -27,6 +27,8 @@ export default Vue.extend({
     // 取得できなければ認証ステータスをfalseに設定する
     const cognitoUser = await Auth.currentAuthenticatedUser();
     this.username = cognitoUser.username;
+    // eslint-disable-next-line
+    console.log(cognitoUser)
   }
 });
 </script>
@@ -51,5 +53,4 @@ export default Vue.extend({
   font-size: 20px;
   margin-right: 10px;
 }
-
 </style>

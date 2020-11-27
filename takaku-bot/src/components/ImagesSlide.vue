@@ -50,7 +50,7 @@ export default Vue.extend({
 </script>
 <style>
 .mask {
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   opacity: 0.3;
   position: fixed;
   top: 0;

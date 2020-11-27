@@ -3,7 +3,7 @@
     <div class="c-logo-container">
       <a href="./">
         <img
-          src="../assets/bot3.png"
+          src="../assets/bot.png"
           class="c-logo-takaku"
           alt="高く売れるドットコムロゴ"
         />
@@ -35,10 +35,10 @@ export default Vue.extend({
         document.body.scrollTop;
       const scroll = scrollTop - this.i;
       this.i = scrollTop;
-      if (scroll < 0) {
-        this.showHeader = true
+      if (scroll < 0.5) {
+        this.showHeader = true;
       } else {
-       this.showHeader = false
+        this.showHeader = false;
       }
     }
   }
@@ -48,18 +48,18 @@ export default Vue.extend({
 h1 {
   font-family: "Franklin Gothic Medium";
   margin-left: 20px;
-  color: gainsboro;
+  color: rgb(220, 220, 220);
   text-decoration: none;
 }
 header {
   position: fixed;
   padding-top: 10px;
-  background: white;
+  background: rgb(220, 220, 220, 0.1);
   top: 0;
   left: 0;
   width: 100%;
   height: 70px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(220, 220, 220, 0.1);
   display: flex;
   justify-items: center;
   align-items: center;

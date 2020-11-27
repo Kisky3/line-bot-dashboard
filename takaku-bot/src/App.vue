@@ -24,6 +24,7 @@ export default Vue.extend({
 html, body {
   font-family: "arial black";
   font-size: 15px;
+  min-width: 1300px;
 }
 
 </style>
