@@ -4,7 +4,6 @@
     <vue-good-table
       :columns="columns"
       :rows="todos"
-      :fixed-header="true"
       styleClass="vgt-table"
       :row-style-class="rowStyleClassFn"
       :search-options="{
@@ -17,7 +16,7 @@
       }"
       :pagination-options="{
         enabled: true,
-        mode: 'pages',
+        mode: 'records',
         perPage: 7,
         position: 'bottom',
         perPageDropdown: [3, 5, 7],
@@ -32,13 +31,19 @@
       }"
       compact-mode
     >
+    <!--データ存在しない場合の表示-->
       <div slot="emptystate">データは存在しません</div>
       <template slot="table-row" slot-scope="props">
+        <!--画像 / 査定-->
         <div v-if="props.column.field == 'Images'" class="image-container">
           <image-container :props="props" @largeImage="largeImage" />
-          <assess-btns :id="props.row.id" @showAlert="openAlert" :disabled="props.row.Status !== 0"/>
+          <assess-btns
+            :id="props.row.id"
+            @showAlert="openAlert"
+            :disabled="props.row.Status !== 0"
+          />
         </div>
-
+        <!--ステータス-->
         <div v-else-if="props.column.field == 'Status'">
           <div class="status-label red" v-if="props.row.Status === 0">
             <b-icon
@@ -59,6 +64,25 @@
         </div>
         <div v-else>{{ props.formattedRow[props.column.field] }}</div>
       </template>
+      <!-- カラムHeaderの表示設定 -->
+      <template slot="table-column" slot-scope="props">
+        <span v-if="props.column.label == 'LineID'">
+          <b-icon icon="file-text" class="space"></b-icon>
+          {{ props.column.label }}
+        </span>
+        <span v-else-if="props.column.label =='ユーザー名'">
+          <b-icon icon="person"></b-icon>
+          {{ props.column.label }}
+        </span>
+         <span v-else-if="props.column.label =='画像 / 査定'">
+           <b-icon icon="file-image" class="space"></b-icon>
+          {{ props.column.label }}
+        </span>
+         <span v-else>
+           <b-icon icon="grid1x2" class="space"></b-icon>
+          {{ props.column.label }}
+        </span>
+      </template>
     </vue-good-table>
     <!--画像のスライド-->
     <images-slide
@@ -70,21 +94,21 @@
       :images="props.row.Images"
     />
     <!--送信前のステータスチェックアラート-->
-      <div class="mask" v-if="showAlert" @click="closeAlert"></div>
-      <b-alert :show="showAlert" class="alert" variant="danger">
-        <b-icon
+    <div class="mask" v-if="showAlert" @click="closeAlert"></div>
+    <b-alert :show="showAlert" class="alert" variant="danger">
+      <b-icon
         icon="x-square-fill"
         variant="danger"
         class="close-btn"
         @click="closeAlert"
       ></b-icon>
-        <h4 class="alert-heading">エラーが発生しました。</h4>
-        <hr />
-        <p class="mb-3">
-          この依頼は全て誰か返信してしまいましたため、再返信はできません。
-        </p>
-        <p class="mb-3">画面をリロードして、未返信の依頼を対応してください。</p>
-      </b-alert>
+      <h4 class="alert-heading">エラーが発生しました。</h4>
+      <hr />
+      <p class="mb-3">
+        この依頼は全て誰か返信してしまいましたため、再返信はできません。
+      </p>
+      <p class="mb-3">画面をリロードして、未返信の依頼を対応してください。</p>
+    </b-alert>
   </div>
 </template>
 
@@ -142,11 +166,11 @@ export default Vue.extend({
     this.getTodos();
   },
   methods: {
-    openAlert(){
-      this.showAlert = true
+    openAlert() {
+      this.showAlert = true;
     },
     closeAlert() {
-      this.showAlert = false
+      this.showAlert = false;
       // 画面リロードする
       this.$router.go(0);
     },
@@ -163,13 +187,13 @@ export default Vue.extend({
     },
     getTodos() {
       this.$emit("gettodos");
-    },
+    }
   }
 });
 </script>
 <style>
 .mask {
-  background-color:none;
+  background-color: none;
   opacity: 0.3;
   position: fixed;
   top: 0;
@@ -185,14 +209,15 @@ export default Vue.extend({
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border: solid 1px #ccc;
   z-index: 1000;
 }
 .table-container {
   color: #606266;
-  margin: 30px;
+  margin: 50px;
   min-height: 700px;
+  min-width: 1200px;
 }
 .image-container {
   display: flex;
