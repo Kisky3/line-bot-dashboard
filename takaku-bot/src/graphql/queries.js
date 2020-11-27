@@ -1,11 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getLineBotRequests = /* GraphQL */ `
-  query GetLineBotRequests($id: ID!) {
-    getLineBotRequests(id: $id) {
+export const getLineBotRequest = /* GraphQL */ `
+  query GetLineBotRequest($id: ID!) {
+    getLineBotRequest(id: $id) {
       id
       LineID
+      UserID
       LineUserName
       Images
       Status
@@ -14,20 +15,17 @@ export const getLineBotRequests = /* GraphQL */ `
     }
   }
 `;
-export const listLineBotRequestss = /* GraphQL */ `
-  query ListLineBotRequestss(
-    $filter: ModelLineBotRequestsFilterInput
+export const listLineBotRequests = /* GraphQL */ `
+  query ListLineBotRequests(
+    $filter: ModelLineBotRequestFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listLineBotRequestss(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+    listLineBotRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         LineID
+        UserID
         LineUserName
         Images
         Status

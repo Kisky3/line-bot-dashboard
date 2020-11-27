@@ -1,6 +1,6 @@
 {
   "api": {
-    "linebot": {
+    "takakubot": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -18,7 +18,7 @@
     }
   },
   "auth": {
-    "lineboteae73301": {
+    "takakubot011d151d": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

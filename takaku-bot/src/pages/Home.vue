@@ -20,7 +20,7 @@ import RequestTable from "../components/RequestTable.vue";
 // import RequestInput from '../components/RequestInput.vue'
 import { API } from "aws-amplify";
 import { createLineBotRequests } from "../graphql/mutations";
-import { listLineBotRequestss } from "../graphql/queries";
+import { listLineBotRequests } from "../graphql/queries";
 import NumberBlockContainer from "../components/NumberBlockContainer.vue";
 import Loading from "../components/Loading.vue";
 import Logout from "../components/Logout.vue";
@@ -47,10 +47,11 @@ export default Vue.extend({
     async getTodos() {
       this.showLoading = true;
       const todos = await API.graphql({
-        query: listLineBotRequestss
+        query: listLineBotRequests
       });
+      // eslint-disable-next-line
       const dataList = todos.data;
-      this.todos = dataList.listLineBotRequestss.items;
+      this.todos = dataList.listLineBotRequests.items;
       this.caculateRequestNumbers(this.todos);
       this.showLoading = false;
     },

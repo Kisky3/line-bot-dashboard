@@ -54,8 +54,8 @@
 <script lang="ts">
 import Vue from "vue";
 import { API, graphqlOperation } from "aws-amplify";
-import { getLineBotRequests } from "../graphql/queries";
-import { updateLineBotRequests } from "../graphql/mutations";
+import { getLineBotRequest } from "../graphql/queries";
+import { updateLineBotRequest } from "../graphql/mutations";
 
 export default Vue.extend({
   name: "AssessBtns",
@@ -63,10 +63,10 @@ export default Vue.extend({
   methods: {
     async setAssessStatus(status) {
       const result = await API.graphql(
-        graphqlOperation(getLineBotRequests, { id: this.id })
+        graphqlOperation(getLineBotRequest, { id: this.id })
       );
       // 返信済みの場合はアラートを出して、画面をリロードする
-      if (result && result.data.getLineBotRequests.Status !== 0) {
+      if (result && result.data.getLineBotRequest.Status !== 0) {
         this.$emit("showAlert");
         return;
       }
@@ -77,7 +77,8 @@ export default Vue.extend({
         //Statusを更新する
         if (sendStatus) {
           this.updateStatus(this.id, status).then(() => {
-            alert("done!!");
+            // 画面リロードする
+            this.$router.go(0);
           });
         }
       } catch (e) {
@@ -86,13 +87,14 @@ export default Vue.extend({
     },
     async sendMessage(id, status) {
       //TODO:Connect Lambda
-      alert(id + status);
+      // eslint-disable-next-line
+      console.log(id + status);
       return;
     },
     async updateStatus(id, status) {
       const input = { id, Status: status };
-      await API.graphql(
-        graphqlOperation(updateLineBotRequests, {
+      return await API.graphql(
+        graphqlOperation(updateLineBotRequest, {
           input
         })
       );

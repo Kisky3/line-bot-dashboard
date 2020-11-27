@@ -1,11 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateLineBotRequests = /* GraphQL */ `
-  subscription OnCreateLineBotRequests {
-    onCreateLineBotRequests {
+export const onCreateLineBotRequest = /* GraphQL */ `
+  subscription OnCreateLineBotRequest {
+    onCreateLineBotRequest {
       id
       LineID
+      UserID
       LineUserName
       Images
       Status
@@ -14,11 +15,12 @@ export const onCreateLineBotRequests = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateLineBotRequests = /* GraphQL */ `
-  subscription OnUpdateLineBotRequests {
-    onUpdateLineBotRequests {
+export const onUpdateLineBotRequest = /* GraphQL */ `
+  subscription OnUpdateLineBotRequest {
+    onUpdateLineBotRequest {
       id
       LineID
+      UserID
       LineUserName
       Images
       Status
@@ -27,11 +29,12 @@ export const onUpdateLineBotRequests = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteLineBotRequests = /* GraphQL */ `
-  subscription OnDeleteLineBotRequests {
-    onDeleteLineBotRequests {
+export const onDeleteLineBotRequest = /* GraphQL */ `
+  subscription OnDeleteLineBotRequest {
+    onDeleteLineBotRequest {
       id
       LineID
+      UserID
       LineUserName
       Images
       Status
