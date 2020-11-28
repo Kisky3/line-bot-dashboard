@@ -1,5 +1,5 @@
 <template>
-  <header v-if="showHeader">
+  <header class="header" v-if="showHeader">
     <div class="c-logo-container">
       <a href="./">
         <img
@@ -51,7 +51,7 @@ h1 {
   color: rgb(220, 220, 220);
   text-decoration: none;
 }
-header {
+.header {
   position: fixed;
   padding-top: 10px;
   background: rgb(220, 220, 220, 0.1);
@@ -66,7 +66,6 @@ header {
   z-index: 10;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
-
 header span {
   color: #fa9826;
   font-weight: bold;
