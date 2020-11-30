@@ -7,6 +7,7 @@ export const getLineBotRequest = /* GraphQL */ `
       id
       LineID
       UserID
+      UserName
       LineUserName
       Images
       Status
@@ -26,6 +27,7 @@ export const listLineBotRequests = /* GraphQL */ `
         id
         LineID
         UserID
+        UserName
         LineUserName
         Images
         Status

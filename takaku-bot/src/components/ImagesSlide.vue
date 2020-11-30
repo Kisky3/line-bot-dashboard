@@ -21,7 +21,7 @@
         <div v-for="img in images" :key="img">
           <b-carousel-slide
             :img-src="img"
-            style="width: 800px; height: 800px; object-fit: cover;"
+            style="width: 600px; height: 600px; object-fit: cover;"
           ></b-carousel-slide>
         </div>
       </b-carousel>
@@ -50,7 +50,7 @@ export default Vue.extend({
 </script>
 <style>
 .mask {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   opacity: 0.3;
   position: fixed;
   top: 0;
@@ -60,13 +60,13 @@ export default Vue.extend({
   z-index: 999;
 }
 .dialog {
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border: solid 1px #ccc;
   background: #ccc;
-  z-index: 1000;
+  z-index: 1041;
 }
 
 .carousel-control-prev-icon,

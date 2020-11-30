@@ -54,6 +54,7 @@ export default Vue.extend({
   font-size: 18px;
   font-weight: bold;
   margin-right: 20px;
+  white-space: nowrap;
 }
 
 .smile-icon {

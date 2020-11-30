@@ -1,7 +1,8 @@
 type LineBotRequest @model {
   id: ID!
   LineID: String!
-  UserID: String!
+  UserID: String
+  UserName: String
   LineUserName: String!
   Images: [String]
   Status: Int

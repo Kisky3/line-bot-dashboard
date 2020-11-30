@@ -10,6 +10,7 @@ export const createLineBotRequest = /* GraphQL */ `
       id
       LineID
       UserID
+      UserName
       LineUserName
       Images
       Status
@@ -27,6 +28,7 @@ export const updateLineBotRequest = /* GraphQL */ `
       id
       LineID
       UserID
+      UserName
       LineUserName
       Images
       Status
@@ -44,6 +46,7 @@ export const deleteLineBotRequest = /* GraphQL */ `
       id
       LineID
       UserID
+      UserName
       LineUserName
       Images
       Status

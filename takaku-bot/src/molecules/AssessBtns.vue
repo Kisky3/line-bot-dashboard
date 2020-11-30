@@ -53,54 +53,14 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { API, graphqlOperation, Auth } from "aws-amplify";
-import { getLineBotRequest } from "../graphql/queries";
-import { updateLineBotRequest } from "../graphql/mutations";
 
 export default Vue.extend({
   name: "AssessBtns",
-  props: ["id", "disabled"],
+  props: ["id", "disabled", "props"],
   methods: {
     async setAssessStatus(status) {
-      const result = await API.graphql(
-        graphqlOperation(getLineBotRequest, { id: this.id })
-      );
-      // 返信済みの場合はアラートを出して、画面をリロードする
-      if (result && result.data.getLineBotRequest.Status !== 0) {
-        this.$emit("showAlert");
-        return;
-      }
-      // 未返信の場合はLambdaに送信する
-      try {
-        const sendStatus = this.sendMessage(this.id, status);
-        //TODO: Lambda戻り値のチェック
-        //Statusを更新する
-        if (sendStatus) {
-          this.updateStatusAndUser(this.id, status).then(() => {
-            // 画面リロードする
-            this.$router.go(0);
-          });
-        }
-      } catch (e) {
-        alert(e.error);
-      }
+      this.$emit("setAssessStatus", this.id, status, this.props);
     },
-    async sendMessage(id, status) {
-      //TODO:Connect Lambda
-      // eslint-disable-next-line
-      console.log(id + status);
-      return;
-    },
-    async updateStatusAndUser(id, status) {
-      const cognitoUser = await Auth.currentAuthenticatedUser();
-      const email = cognitoUser.attributes.email;
-      const input = { id, Status: status, UserID: email };
-      return await API.graphql(
-        graphqlOperation(updateLineBotRequest, {
-          input
-        })
-      );
-    }
   }
 });
 </script>

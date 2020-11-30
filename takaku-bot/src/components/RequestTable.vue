@@ -31,7 +31,7 @@
       }"
       compact-mode
     >
-    <!--データ存在しない場合の表示-->
+      <!--データ存在しない場合の表示-->
       <div slot="emptystate">データは存在しません</div>
       <template slot="table-row" slot-scope="props">
         <!--画像 / 査定-->
@@ -39,8 +39,9 @@
           <image-container :props="props" @largeImage="largeImage" />
           <assess-btns
             :id="props.row.id"
-            @showAlert="openAlert"
+            @setAssessStatus="setAssessStatus"
             :disabled="props.row.Status !== 0"
+            :props="props"
           />
         </div>
         <!--ステータス-->
@@ -54,12 +55,14 @@
             >未返信
           </div>
           <div class="status-label green" v-else>
-            <b-icon
-              icon="patch-check-fll"
-              variant="info"
-              class="space"
-            ></b-icon>
-            返信済み
+            <div>
+              <b-icon icon="patch-check-fll" variant="info" class="space"></b-icon
+            >返信済み
+            </div>
+            <span v-if="props.row.Status === 1">{{props.row.UserName + "さんは「買取不明」を返信しました"}}</span>
+            <span v-if="props.row.Status === 2">{{props.row.UserName + "さんは「買取不可」を返信しました"}}</span>
+            <span v-if="props.row.Status === 3">{{props.row.UserName + "さんは「高くフォームを送信」を返信しました"}}</span>
+            <span v-if="props.row.Status === 4">{{props.row.UserName + "さんは「おいくらフォームを送信」を返信しました"}}</span>
           </div>
         </div>
         <div v-else>{{ props.formattedRow[props.column.field] }}</div>
@@ -70,16 +73,16 @@
           <b-icon icon="file-text" class="space"></b-icon>
           {{ props.column.label }}
         </span>
-        <span v-else-if="props.column.label =='ユーザー名'">
+        <span v-else-if="props.column.label == 'ユーザー名'">
           <b-icon icon="person"></b-icon>
           {{ props.column.label }}
         </span>
-         <span v-else-if="props.column.label =='画像 / 査定'">
-           <b-icon icon="file-image" class="space"></b-icon>
+        <span v-else-if="props.column.label == '画像 / 査定'">
+          <b-icon icon="file-image" class="space"></b-icon>
           {{ props.column.label }}
         </span>
-         <span v-else>
-           <b-icon icon="grid1x2" class="space"></b-icon>
+        <span v-else>
+          <b-icon icon="grid1x2" class="space"></b-icon>
           {{ props.column.label }}
         </span>
       </template>
@@ -94,22 +97,15 @@
       :images="props.row.Images"
     />
     <!--送信前のステータスチェックアラート-->
-    <div class="mask" v-if="showAlert" @click="closeAlert"></div>
-    <b-alert :show="true" class="alert" variant="danger">
-      <b-icon
-        icon="x-square-fill"
-        variant="danger"
-        class="close-btn"
-        @click="closeAlert"
-      ></b-icon>
-      <h4 class="alert-heading">エラーが発生しました。</h4>
-      <hr />
-      <p class="mb-3">
-        この依頼は全て誰か返信してしまいましたため、再返信はできません。
-      </p>
-      <p class="mb-3">画面をリロードして、未返信の依頼を対応してください。</p>
-    </b-alert>
-    <confirm-dialog class="alert"/>
+    <confirm-dialog
+      ref="controlDialog"
+      :type="dialogType"
+      :title="dialogTitle"
+      :content="dialogContent"
+      @sendMessage="sendMessage"
+    >
+      <image-container :props="props" @largeImage="largeImage" />
+    </confirm-dialog>
   </div>
 </template>
 
@@ -120,6 +116,9 @@ import AssessBtns from "../molecules/AssessBtns.vue";
 import ImageContainer from "../molecules/ImageContainer.vue";
 import ImagesSlide from "../components/ImagesSlide.vue";
 import ConfirmDialog from "../molecules/ConfirmDialog.vue";
+import { updateLineBotRequest } from "../graphql/mutations";
+import { API, graphqlOperation, Auth } from "aws-amplify";
+import { getLineBotRequest } from "../graphql/queries";
 
 export default Vue.extend({
   name: "RequestTable",
@@ -133,10 +132,16 @@ export default Vue.extend({
   props: ["todos"],
   data() {
     return {
+      id: null,
+      status: "",
       showImageSlide: false,
       num: 0,
       props: null,
       showAlert: false,
+      dialogType: "alert",
+      dialogContent: null,
+      dialogMessage: "",
+      dialogTitle: "",
       columns: [
         {
           label: "LineID",
@@ -169,14 +174,6 @@ export default Vue.extend({
     this.getTodos();
   },
   methods: {
-    openAlert() {
-      this.showAlert = true;
-    },
-    closeAlert() {
-      this.showAlert = false;
-      // 画面リロードする
-      this.$router.go(0);
-    },
     closeImageSlide() {
       this.showImageSlide = false;
     },
@@ -190,6 +187,75 @@ export default Vue.extend({
     },
     getTodos() {
       this.$emit("gettodos");
+    },
+    async setAssessStatus(id, status, props) {
+      // props中の画像内容をconfirm dialogに渡す
+      this.id = id;
+      this.props = props;
+      this.status = status;
+
+      const result = await API.graphql(
+        graphqlOperation(getLineBotRequest, { id })
+      );
+
+      // 返信済みの場合はアラートを出して、画面をリロードする
+      if (result && result.data.getLineBotRequest.Status !== 0) {
+        this.dialogType = "alert";
+        this.dialogTitle = "エラーが発生しました。";
+        this.dialogContent =
+          "この依頼は誰か返信してしまいました、再返信はできません。未返信の依頼を対応してください。";
+        this.$refs.controlDialog.showModal();
+        return;
+      }
+
+      let assessStatus = "";
+      switch (status) {
+        case 1:
+          assessStatus = "買取不明";
+          break;
+        case 2:
+          assessStatus = "買取不可";
+          break;
+        case 3:
+          assessStatus = "高くフォームを送信";
+          break;
+        case 4:
+          assessStatus = "おいくらフォームを送信";
+          break;
+      }
+
+      const content = `${this.props.row.LineUserName}様から頂いた写真の査定結果は「${assessStatus}」。`;
+
+      // 未返信の場合は確認ダイアログを表示する
+      this.dialogType = "confirm";
+      this.dialogTitle = "下記の内容で送信しますか";
+      this.dialogContent = content;
+      this.$refs.controlDialog.showModal();
+    },
+    async sendMessage() {
+      //TODO:Connect Lambda passing id and status
+      const sendStatus = true;
+      try {
+        //Statusと操作ユーザー情報を更新する
+        if (sendStatus) {
+          this.updateStatusAndUser(this.id, this.status).then(() => {
+            // 画面リロードする
+            this.$router.go(0);
+          });
+        }
+      } catch (e) {
+        alert(e.error);
+      }
+    },
+    async updateStatusAndUser(id, status) {
+      const cognitoUser = await Auth.currentAuthenticatedUser();
+      const email = cognitoUser.attributes.email;
+      const input = { id, Status: status, UserID: email };
+      return await API.graphql(
+        graphqlOperation(updateLineBotRequest, {
+          input
+        })
+      );
     }
   }
 });
@@ -208,14 +274,6 @@ export default Vue.extend({
 .info {
   background: #dcdcdc4f;
 }
-.alert {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border: solid 1px #ccc;
-  z-index: 1000;
-}
 .table-container {
   color: #606266;
   margin: 40px;
@@ -230,14 +288,13 @@ export default Vue.extend({
   border: dotted 3px gainsboro;
 }
 .status-label {
-  width: 80px;
+  width: 180px;
   height: 30px;
   color: white;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   margin: auto;
-  white-space: nowrap;
 }
 .status-label.red {
   font-size: 18px;
@@ -251,6 +308,21 @@ export default Vue.extend({
   font-weight: bold;
   color: #17a2b8;
   background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+  max-width: 180px;
+}
+
+.green > span {
+  font-size: 16px;
+  color: black;
+  font-weight: normal;
+  text-align: start;
+  word-wrap:break-word!important;
+  word-break : break-all!important;
 }
 
 .vgt-table {
