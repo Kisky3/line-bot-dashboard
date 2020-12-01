@@ -1,13 +1,14 @@
 <template>
-  <header class="header" v-if="showHeader">
+  <header class="header" v-if="showHeader" :class="{ '-hidden': scrollY > 25 }">
     <div class="c-logo-container">
       <a href="./">
         <img
           src="../assets/bot.png"
           class="c-logo-takaku"
+          :class="{ '-disappear': scrollY > 25 }"
           alt="高く売れるドットコムロゴ"
         />
-        <h1>TAKAKU BOT DASHBOARD</h1>
+        <p class="title" :class="{ '-sm': scrollY > 25 }">TAKAKU BOT DASHBOARD</p>
       </a>
     </div>
   </header>
@@ -20,36 +21,27 @@ export default Vue.extend({
   name: "Header",
   data() {
     return {
-      i: 0,
+      scrollY: 0,
       showHeader: true
     };
   },
   mounted() {
-    window.addEventListener("scroll", this.handleScroll, true);
+    window.addEventListener('scroll', this.handleScroll)
   },
   methods: {
     handleScroll() {
-      const scrollTop =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop;
-      const scroll = scrollTop - this.i;
-      this.i = scrollTop;
-      if (scroll < 0.5) {
-        this.showHeader = true;
-      } else {
-        this.showHeader = false;
-      }
+      this.scrollY = window.scrollY
     }
   }
 });
 </script>
 <style>
-h1 {
+.title {
   font-family: "Franklin Gothic Medium";
   margin-left: 20px;
   color: rgb(220, 220, 220);
   text-decoration: none;
+  font-size: 30px;
 }
 .header {
   position: fixed;
@@ -66,7 +58,22 @@ h1 {
   z-index: 10;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
-header span {
+
+.-hidden {
+  height: 20px;
+  background: black;
+  padding-top: 15px;
+}
+
+.-sm {
+  font-size: 13px;
+}
+
+.-disappear {
+  display: none;
+}
+
+.header span {
   color: #fa9826;
   font-weight: bold;
   float: left;

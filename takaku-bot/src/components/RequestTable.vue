@@ -147,13 +147,13 @@ export default Vue.extend({
           label: "LineID",
           field: "id",
           type: "string",
-          width: "180px"
+          width: "130px"
         },
         {
-          label: "ユーザー名",
+          label: "ユーザー",
           field: "LineUserName",
           type: "string",
-          width: "180px"
+          width: "130px"
         },
         {
           label: "画像 / 査定",
@@ -165,7 +165,7 @@ export default Vue.extend({
           label: "ステータス",
           field: "Status",
           type: "number",
-          width: "180px"
+          width: "130px"
         }
       ]
     };
@@ -250,7 +250,8 @@ export default Vue.extend({
     async updateStatusAndUser(id, status) {
       const cognitoUser = await Auth.currentAuthenticatedUser();
       const email = cognitoUser.attributes.email;
-      const input = { id, Status: status, UserID: email };
+      const name = cognitoUser.username;
+      const input = { id, Status: status, UserID: email, UserName: name };
       return await API.graphql(
         graphqlOperation(updateLineBotRequest, {
           input
@@ -276,7 +277,7 @@ export default Vue.extend({
 }
 .table-container {
   color: #606266;
-  margin: 40px;
+  margin: 30px;
   min-height: 700px;
   min-width: 1200px;
 }
@@ -327,5 +328,21 @@ export default Vue.extend({
 
 .vgt-table {
   background: black;
+}
+
+@media (max-width: 576px) {
+table.vgt-table td {
+  padding: .75em .75em .75em .75em;
+    vertical-align: top;
+    border-bottom: 1px solid #dcdfe6;
+    color: #606266;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.green {
+  white-space: nowrap;
+  padding-top:0;
+}
 }
 </style>
