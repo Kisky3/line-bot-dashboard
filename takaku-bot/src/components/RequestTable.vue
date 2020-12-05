@@ -239,7 +239,7 @@ export default Vue.extend({
         //Statusと操作ユーザー情報を更新する
         if (sendStatus) {
           this.updateStatusAndUser(this.id, this.status).then(() => {
-            // 画面リロードする
+            // 画面リロード
             this.$router.go(0);
           });
         }
