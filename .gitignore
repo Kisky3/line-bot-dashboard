@@ -1,4 +1,5 @@
 #amplify
+src/aws-exports.js
 amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/mock-data
