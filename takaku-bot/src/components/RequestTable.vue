@@ -55,7 +55,7 @@
             >未返信
           </div>
           <div class="status-label green" v-else>
-            <div>
+            <div class="status-sublabel">
               <b-icon icon="patch-check-fll" variant="info" class="space"></b-icon
             >返信済み
             </div>
@@ -165,7 +165,8 @@ export default Vue.extend({
           label: "ステータス",
           field: "Status",
           type: "number",
-          width: "130px"
+          width: "130px",
+
         }
       ]
     };
@@ -295,13 +296,17 @@ export default Vue.extend({
   display: flex;
   justify-content: start;
   align-items: center;
-  margin: auto;
 }
 .status-label.red {
   font-size: 18px;
   font-weight: bold;
   color: #dc3545;
   background: none;
+  margin-left: -3px;
+}
+
+.status-sublabel {
+  margin-left: -85px;
 }
 
 .status-label.green {
@@ -343,6 +348,10 @@ table.vgt-table td {
 .green {
   white-space: nowrap;
   padding-top:0;
+}
+
+.image-container {
+  flex-direction: column;
 }
 }
 </style>

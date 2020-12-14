@@ -63,6 +63,8 @@ export default Vue.extend({
   height: 20px;
   background: black;
   padding-top: 15px;
+  border-bottom: 1px solid #f0f0f05b;
+  box-shadow: 0 4px 4px rgba(0,0,0,.18);
 }
 
 .-sm {
