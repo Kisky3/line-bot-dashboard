@@ -1,8 +1,8 @@
 <template>
   <div class="number-block-container">
-    <number-block color="yellow" label="すべて" :number="allNumber" />
-    <number-block color="red" label="未返信" :number="unreplied" />
-    <number-block color="green" label="返信済み" :number="replied" />
+    <number-block label="すべて" :number="allNumber" />
+    <number-block  label="未返信" :number="unreplied" />
+    <number-block label="返信済み" :number="replied" />
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default Vue.extend({
   display: flex;
   justify-content: start;
   align-items: center;
-  margin: 80px 40px 10px 40px;
-  height: 80px;
+  margin: 10px;
+  height: 30px;
 }
 </style>

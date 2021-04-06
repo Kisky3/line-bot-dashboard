@@ -63,8 +63,7 @@ export default {
 <style scoped>
 .table-container {
   margin: auto;
-  max-width: 1200px;
-  margin-top: 100px;
+  width: 100%;
 }
 
 input,

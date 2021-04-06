@@ -1,16 +1,10 @@
 <template>
   <div class="number-block-container">
     <div class="number-block-title">
-      <b-icon
-        icon="emoji-sunglasses"
-        ont-scale="15"
-        class="smile-icon"
-      ></b-icon>
-      ようこそ！ {{ username }} 様
+      {{ username }}さん
     </div>
     <b-button variant="outline-info" class="mb-2" @click="onSignOutClick">
-      <b-icon icon="power" aria-hidden="true"></b-icon>
-      Logout
+      ログアウト
     </b-button>
   </div>
 </template>
@@ -50,17 +44,20 @@ export default Vue.extend({
 }
 
 .number-block-title {
-  color: #17a2b8;
-  font-size: 18px;
+  color: white;
+  font-size: 15px;
   font-weight: bold;
-  margin-right: 20px;
   white-space: nowrap;
 }
 
-.smile-icon {
-  font-size: 20px;
-  margin-right: 10px;
+.mb-2 {
+  font-size: 13px;
+  height: 25px;
+  border: 0;
+  color: white;
+  width: 100px;
 }
+
 
 .btn:hover {
   opacity: 1;

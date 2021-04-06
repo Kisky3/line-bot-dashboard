@@ -1,15 +1,7 @@
 <template>
-  <header class="header" v-if="showHeader" :class="{ '-hidden': scrollY > 25 }">
+  <header class="header">
     <div class="c-logo-container">
-      <a href="./">
-        <img
-          src="../assets/bot.png"
-          class="c-logo-takaku"
-          :class="{ '-disappear': scrollY > 25 }"
-          alt="高く売れるドットコムロゴ"
-        />
-        <p class="title" :class="{ '-sm': scrollY > 25 }">TAKAKU BOT DASHBOARD</p>
-      </a>
+      <p class="title">高く売れるbot ダッシュボード</p>
     </div>
   </header>
 </template>
@@ -19,38 +11,23 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "Header",
-  data() {
-    return {
-      scrollY: 0,
-      showHeader: true
-    };
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  methods: {
-    handleScroll() {
-      this.scrollY = window.scrollY
-    }
-  }
 });
 </script>
 <style>
 .title {
   font-family: "Franklin Gothic Medium";
-  margin-left: 20px;
-  color: rgb(220, 220, 220);
+  color: #222;
+  margin: 5px 0;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 15px;
+  font-weight: bold;
 }
 .header {
-  position: fixed;
-  padding-top: 10px;
-  background: rgb(220, 220, 220, 0.1);
+  background: #fff;
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 30px;
   border-bottom: 1px solid rgba(220, 220, 220, 0.1);
   display: flex;
   justify-items: center;
@@ -91,6 +68,7 @@ export default Vue.extend({
 
 .c-logo-container {
   width: 100%;
+  margin-left: 15px;
 }
 
 .c-logo-container a {

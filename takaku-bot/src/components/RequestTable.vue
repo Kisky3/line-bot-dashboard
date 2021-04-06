@@ -1,15 +1,10 @@
 <template>
   <div class="table-container">
-    <h5>依頼一覧</h5>
     <vue-good-table
       :columns="columns"
       :rows="todos"
       styleClass="vgt-table"
       :row-style-class="rowStyleClassFn"
-      :search-options="{
-        enabled: true,
-        placeholder: 'キーワードを入力してデーターを検索する'
-      }"
       :sort-options="{
         enabled: false,
         initialSortBy: { field: 'Status', type: 'asc' }
@@ -70,19 +65,15 @@
       <!-- カラムHeaderの表示設定 -->
       <template slot="table-column" slot-scope="props">
         <span v-if="props.column.label == 'LineID'">
-          <b-icon icon="file-text" class="space"></b-icon>
           {{ props.column.label }}
         </span>
         <span v-else-if="props.column.label == 'ユーザー名'">
-          <b-icon icon="person"></b-icon>
           {{ props.column.label }}
         </span>
         <span v-else-if="props.column.label == '画像 / 査定'">
-          <b-icon icon="file-image" class="space"></b-icon>
           {{ props.column.label }}
         </span>
         <span v-else>
-          <b-icon icon="grid1x2" class="space"></b-icon>
           {{ props.column.label }}
         </span>
       </template>
@@ -165,8 +156,7 @@ export default Vue.extend({
           label: "ステータス",
           field: "Status",
           type: "number",
-          width: "130px",
-
+          width: "130px"
         }
       ]
     };
@@ -240,7 +230,7 @@ export default Vue.extend({
         //Statusと操作ユーザー情報を更新する
         if (sendStatus) {
           this.updateStatusAndUser(this.id, this.status).then(() => {
-            // 画面リロード
+            // 画面リロードする
             this.$router.go(0);
           });
         }
@@ -278,7 +268,6 @@ export default Vue.extend({
 }
 .table-container {
   color: #606266;
-  margin: 30px;
   min-height: 700px;
   min-width: 1200px;
 }
@@ -296,6 +285,7 @@ export default Vue.extend({
   display: flex;
   justify-content: start;
   align-items: center;
+  margin: auto;
 }
 .status-label.red {
   font-size: 18px;
