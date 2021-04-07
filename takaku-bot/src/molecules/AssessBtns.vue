@@ -75,13 +75,13 @@ export default Vue.extend({
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
   transition: margin-top 0.15s, box-shadow 0.15s, opacity 0.15s;
 }
 
 .send-btn.green {
   background: #17a2b8;
   border: solid 1px #17a2b8;
-  font-weight: bold;
 }
 
 .send-btn.white {
