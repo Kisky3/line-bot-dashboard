@@ -1,5 +1,5 @@
 <template>
-  <div class="c-btn-row">
+  <div>
     <div
       class="c-btn-container"
       v-if="status === 0"
@@ -34,7 +34,7 @@
         </b-button>
       </div>
     </div>
-    <div v-else>
+   <div v-else>
       <div class="replied-container" v-if="status === 3">
          <b-icon icon="circle" class="b-icon-sm" aria-hidden="true"></b-icon>
          <span>買取可能</span>
@@ -138,6 +138,7 @@ export default Vue.extend({
   align-items: center;
   color: #17a2b8;
   flex-direction: column;
-  margin: auto;
+  margin: 15px 85px;
+  width: 100px;
 }
 </style>

@@ -29,8 +29,12 @@
       <!--データ存在しない場合の表示-->
       <div slot="emptystate">データは存在しません</div>
       <template slot="table-row" slot-scope="props">
+        <!--登録日時-->
+        <div v-if="props.column.field == 'createdAt'">
+          {{ editDate(props.row.createdAt) }}
+        </div>
         <!--画像 / 査定-->
-        <div v-if="props.column.field == 'Images'" class="image-container">
+        <div v-else-if="props.column.field == 'Images'" class="image-container">
           <image-container :props="props" @largeImage="largeImage" />
           <assess-btns
             :id="props.row.id"
@@ -47,9 +51,9 @@
           <div class="status-label green" v-else>
             返信済
           </div>
-            <span class="status-label-reply" v-if="props.row.Status === 1">{{props.row.UserName + "さんは「買取不明」を返信しました"}}</span>
-            <span class="status-label-reply" v-if="props.row.Status === 2">{{props.row.UserName + "さんは「買取不可」を返信しました"}}</span>
-            <span class="status-label-reply" v-if="props.row.Status === 3">{{props.row.UserName + "さんは「買取可能」を返信しました"}}</span>
+            <span class="status-label-reply" v-if="props.row.Status === 1">{{props.row.UserName + "さんは「買取不明」を返信しました" + editDate(props.row.repliedAt)}}</span>
+            <span class="status-label-reply" v-if="props.row.Status === 2">{{props.row.UserName + "さんは「買取不可」を返信しました"+ editDate(props.row.repliedAt)}}</span>
+            <span class="status-label-reply" v-if="props.row.Status === 3">{{props.row.UserName + "さんは「買取可能」を返信しました"+ editDate(props.row.repliedAt)}}</span>
         </div>
         <div v-else>{{ props.formattedRow[props.column.field] }}</div>
       </template>
@@ -126,8 +130,8 @@ export default Vue.extend({
       dialogTitle: "",
       columns: [
         {
-          label: "LineID",
-          field: "id",
+          label: "登録日時",
+          field: "createdAt",
           type: "string",
           width: "130px"
         },
@@ -164,8 +168,14 @@ export default Vue.extend({
       this.num = num;
       this.showImageSlide = true;
     },
+    editDate(propDate) {
+      const date = propDate.split("T")[0].split("-").join("/");
+      const time = propDate.split("T")[1].substr(0, 5);
+      const currentData = "\xa0\xa0" + date + "\xa0\xa0" + time;
+      return currentData
+    },
     rowStyleClassFn(row) {
-      return row.Status === 0 ? "info" : "";
+      return row.Status !== 0 ? "info" : "";
     },
     getTodos() {
       this.$emit("gettodos");

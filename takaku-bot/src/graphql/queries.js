@@ -12,6 +12,7 @@ export const getLineBotRequest = /* GraphQL */ `
       Images
       Status
       createdAt
+      repliedAt
       updatedAt
     }
   }
@@ -32,6 +33,7 @@ export const listLineBotRequests = /* GraphQL */ `
         Images
         Status
         createdAt
+        repliedAt
         updatedAt
       }
       nextToken

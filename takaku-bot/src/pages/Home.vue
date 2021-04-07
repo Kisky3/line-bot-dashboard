@@ -1,11 +1,11 @@
 <template>
   <div>
-    <!-- <request-input @request="createLineRequests" /> -->
     <div class="top-container">
       <number-block-container
         :allNumber="allNumber"
         :replied="replied"
         :unreplied="unreplied"
+        @tabFilter="tabFilter(status)"
       />
       <logout />
     </div>
@@ -17,7 +17,6 @@
 <script lang="ts">
 import Vue from "vue";
 import RequestTable from "../components/RequestTable.vue";
-// import RequestInput from '../components/RequestInput.vue'
 import { API } from "aws-amplify";
 import { createLineBotRequest } from "../graphql/mutations";
 import { listLineBotRequests } from "../graphql/queries";
@@ -29,7 +28,6 @@ export default Vue.extend({
   name: "Home",
   components: {
     RequestTable,
-    // RequestInput,
     NumberBlockContainer,
     Loading,
     Logout
@@ -55,21 +53,12 @@ export default Vue.extend({
       this.caculateRequestNumbers(this.todos);
       this.showLoading = false;
     },
-    async createLineRequests(ev) {
+    async tabFilter(status){
       this.showLoading = true;
-      const { LineID, LineUserName, Images, Status } = ev;
-      if (!LineID || !LineUserName) return;
-      const todo = { LineID, LineUserName, Images, Status };
-      this.todos = [...this.todos, todo];
-      this.caculateRequestNumbers(this.todos);
       await API.graphql({
-        query: createLineBotRequest,
-        variables: { input: todo }
+        query: listLineBotRequests,
+        variables: { Status: status }
       });
-      this.LineID = "";
-      this.LineUserName = "";
-      this.Images = "";
-      this.Status = "";
       this.showLoading = false;
     },
     caculateRequestNumbers(list) {

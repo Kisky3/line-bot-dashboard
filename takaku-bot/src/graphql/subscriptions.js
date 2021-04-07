@@ -12,6 +12,7 @@ export const onCreateLineBotRequest = /* GraphQL */ `
       Images
       Status
       createdAt
+      repliedAt
       updatedAt
     }
   }
@@ -27,6 +28,7 @@ export const onUpdateLineBotRequest = /* GraphQL */ `
       Images
       Status
       createdAt
+      repliedAt
       updatedAt
     }
   }
@@ -42,6 +44,7 @@ export const onDeleteLineBotRequest = /* GraphQL */ `
       Images
       Status
       createdAt
+      repliedAt
       updatedAt
     }
   }

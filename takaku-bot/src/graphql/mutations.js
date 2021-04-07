@@ -15,6 +15,7 @@ export const createLineBotRequest = /* GraphQL */ `
       Images
       Status
       createdAt
+      repliedAt
       updatedAt
     }
   }
@@ -33,6 +34,7 @@ export const updateLineBotRequest = /* GraphQL */ `
       Images
       Status
       createdAt
+      repliedAt
       updatedAt
     }
   }
@@ -51,6 +53,7 @@ export const deleteLineBotRequest = /* GraphQL */ `
       Images
       Status
       createdAt
+      repliedAt
       updatedAt
     }
   }

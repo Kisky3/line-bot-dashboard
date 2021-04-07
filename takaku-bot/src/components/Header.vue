@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="c-logo-container">
-      <p class="title">高く売れるbot ダッシュボード</p>
+      <p class="title">写真でおいくら? ダッシュボード</p>
     </div>
   </header>
 </template>
