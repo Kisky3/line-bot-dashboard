@@ -10,7 +10,7 @@
         <b-button
           size="sm"
           variant="warning"
-          class="btn"
+          class="send-btn"
           @click="setAssessStatus(4)"
           :disabled="disabled"
         >
@@ -20,7 +20,7 @@
         <b-button
           size="sm"
           variant="dark"
-          class="btn"
+          class="send-btn"
           @click="setAssessStatus(1)"
           :disabled="disabled"
         >
@@ -30,7 +30,7 @@
         <b-button
           size="sm"
           variant="dark"
-          class="btn"
+          class="send-btn"
           @click="setAssessStatus(2)"
           :disabled="disabled"
         >
@@ -67,19 +67,26 @@ export default Vue.extend({
   justify-content: flex-start;
   flex-direction: row;
 }
-.btn {
+.send-btn {
   margin: 5px 10px;
   width: 70px;
-  height: 70px;
+  height: 65px;
   border-radius: 5px;
   display: flex;
+  box-shadow: 0px 5px #666;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition-duration: 5s;
+  transition: linear
 }
 
-.btn:hover {
-  opacity: 0.7;
+.send-btn:hover {
+  opacity: 0.6;
+  height: 65px;
+  box-shadow: none;
+  margin-top: 10px;
+  top: -5px;
 }
 
 .disabled {
