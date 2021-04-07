@@ -29,6 +29,10 @@ label {
   background: #17a2b8;
   margin-top: 10px;
 }
+label:hover {
+  cursor: pointer;
+  background: #17a2b8;
+}
 .number-block {
   display: flex;
   justify-content: center;
