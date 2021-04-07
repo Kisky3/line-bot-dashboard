@@ -2,7 +2,7 @@
   <div class="table-container">
     <vue-good-table
       :columns="columns"
-      :rows="todos"
+      :rows="requests"
       styleClass="vgt-table bordered"
       :row-style-class="rowStyleClassFn"
       :sort-options="{
@@ -51,9 +51,9 @@
           <div class="status-label green" v-else>
             返信済
           </div>
-            <span class="status-label-reply" v-if="props.row.Status === 1">{{props.row.UserName + "さんは「買取不明」を返信しました" + editDate(props.row.repliedAt)}}</span>
-            <span class="status-label-reply" v-if="props.row.Status === 2">{{props.row.UserName + "さんは「買取不可」を返信しました"+ editDate(props.row.repliedAt)}}</span>
-            <span class="status-label-reply" v-if="props.row.Status === 3">{{props.row.UserName + "さんは「買取可能」を返信しました"+ editDate(props.row.repliedAt)}}</span>
+            <span class="status-label-reply" v-if="props.row.Status === 1">{{editDate(props.row.repliedAt) + props.row.UserName + "さんは「買取不明」を返信しました。"}}</span>
+            <span class="status-label-reply" v-if="props.row.Status === 2">{{editDate(props.row.repliedAt) + props.row.UserName + "さんは「買取不可」を返信しました。"}}</span>
+            <span class="status-label-reply" v-if="props.row.Status === 3">{{editDate(props.row.repliedAt) + props.row.UserName + "さんは「買取可能」を返信しました。"}}</span>
         </div>
         <div v-else>{{ props.formattedRow[props.column.field] }}</div>
       </template>
@@ -115,7 +115,7 @@ export default Vue.extend({
     ImagesSlide,
     ConfirmDialog
   },
-  props: ["todos"],
+  props: ["requests"],
   data() {
     return {
       id: null,
@@ -157,7 +157,7 @@ export default Vue.extend({
     };
   },
   async created() {
-    this.getTodos();
+    this.getRequests();
   },
   methods: {
     closeImageSlide() {
@@ -171,14 +171,14 @@ export default Vue.extend({
     editDate(propDate) {
       const date = propDate.split("T")[0].split("-").join("/");
       const time = propDate.split("T")[1].substr(0, 5);
-      const currentData = "\xa0\xa0" + date + "\xa0\xa0" + time;
+      const currentData = date + "\xa0\xa0" + time + "\xa0\xa0" ;
       return currentData
     },
     rowStyleClassFn(row) {
       return row.Status !== 0 ? "info" : "";
     },
-    getTodos() {
-      this.$emit("gettodos");
+    getRequests() {
+      this.$emit("getRequests");
     },
     async setAssessStatus(id, status, props) {
       // props中の画像内容をconfirm dialogに渡す

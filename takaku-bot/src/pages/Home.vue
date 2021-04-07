@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="top-container">
-      <number-block-container
+      <tab-filter-container
         :allNumber="allNumber"
         :replied="replied"
         :unreplied="unreplied"
-        @tabFilter="tabFilter(status)"
+        @tabFilter="tabFilter"
       />
       <logout />
     </div>
-    <request-table @gettodos="getTodos" :todos="todos" />
+    <request-table @getRequests="getRequests" :requests="requests" />
     <loading :showLoading="showLoading" />
   </div>
 </template>
@@ -17,24 +17,23 @@
 <script lang="ts">
 import Vue from "vue";
 import RequestTable from "../components/RequestTable.vue";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { createLineBotRequest } from "../graphql/mutations";
 import { listLineBotRequests } from "../graphql/queries";
-import NumberBlockContainer from "../components/NumberBlockContainer.vue";
+import TabFilterContainer from "../components/TabFilterContainer.vue";
 import Loading from "../components/Loading.vue";
 import Logout from "../components/Logout.vue";
-
 export default Vue.extend({
   name: "Home",
   components: {
     RequestTable,
-    NumberBlockContainer,
+    TabFilterContainer,
     Loading,
     Logout
   },
   data() {
     return {
-      todos: [],
+      requests: [],
       allNumber: 0,
       replied: 0,
       unreplied: 0,
@@ -42,23 +41,36 @@ export default Vue.extend({
     };
   },
   methods: {
-    async getTodos() {
+    async getRequests() {
       this.showLoading = true;
-      const todos = await API.graphql({
+      const requests = await API.graphql({
         query: listLineBotRequests
       });
       // eslint-disable-next-line
-      const dataList = todos.data;
-      this.todos = dataList.listLineBotRequests.items;
-      this.caculateRequestNumbers(this.todos);
+      const dataList = requests.data;
+      this.requests = dataList.listLineBotRequests.items;
+      this.caculateRequestNumbers(this.requests);
       this.showLoading = false;
     },
-    async tabFilter(status){
+    async tabFilter(value){
       this.showLoading = true;
-      await API.graphql({
+      //すべて
+      if(value === undefined) {
+        this.getRequests();
+        return
+      }
+      //すべて以外の場合はfilterでstatusを設定して取得する
+      const filter = {
+        Status: {
+        eq: value
+        }
+      }
+      const requests =await API.graphql({
         query: listLineBotRequests,
-        variables: { Status: status }
+        variables: { filter: filter }
       });
+      const dataList = requests.data;
+      this.requests = dataList.listLineBotRequests.items;
       this.showLoading = false;
     },
     caculateRequestNumbers(list) {

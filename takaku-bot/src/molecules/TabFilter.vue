@@ -1,6 +1,6 @@
 <template>
   <div class="number-block">
-     <label>
+     <label v-on:click="tabFilter()">
       {{ label }} ({{ number }})
     </label>
   </div>
@@ -11,7 +11,12 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "NumberBlock",
-  props: ["number", "label"]
+  props: ["number", "label"],
+  methods: {
+    tabFilter() {
+      this.$emit("tabFilter");
+    }
+  }
 });
 </script>
 <style>
