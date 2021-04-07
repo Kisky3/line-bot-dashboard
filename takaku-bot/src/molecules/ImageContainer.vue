@@ -8,7 +8,7 @@
         class="image"
         @click="largeImage(index, props)"
         v-b-tooltip.hover
-        title="クリックしてこの画像を拡大"
+        title="クリックして画像を拡大する"
       >
     </div>
   </div>

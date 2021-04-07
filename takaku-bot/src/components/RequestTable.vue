@@ -35,7 +35,7 @@
           <assess-btns
             :id="props.row.id"
             @setAssessStatus="setAssessStatus"
-            :disabled="props.row.Status !== 0"
+            :status="props.row.Status"
             :props="props"
           />
         </div>
@@ -49,7 +49,7 @@
           </div>
             <span class="status-label-reply" v-if="props.row.Status === 1">{{props.row.UserName + "さんは「買取不明」を返信しました"}}</span>
             <span class="status-label-reply" v-if="props.row.Status === 2">{{props.row.UserName + "さんは「買取不可」を返信しました"}}</span>
-            <span class="status-label-reply" v-if="props.row.Status === 3">{{props.row.UserName + "さんは「高くフォームを送信」を返信しました"}}</span>
+            <span class="status-label-reply" v-if="props.row.Status === 3">{{props.row.UserName + "さんは「買取可能」を返信しました"}}</span>
         </div>
         <div v-else>{{ props.formattedRow[props.column.field] }}</div>
       </template>
@@ -198,7 +198,7 @@ export default Vue.extend({
         case 2:
           assessStatus = "買取不可";
           break;
-        case 4:
+        case 3:
           assessStatus = "買取可能";
           break;
       }

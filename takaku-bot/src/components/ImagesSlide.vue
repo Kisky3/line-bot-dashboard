@@ -70,7 +70,7 @@ export default Vue.extend({
 }
 
 .close-btn {
-  color: red;
+  color: gray;
   font-size: 40px;
   position: absolute;
   top: 5px;

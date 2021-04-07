@@ -1,16 +1,14 @@
 <template>
-  <div>
+  <div class="c-btn-row">
     <div
       class="c-btn-container"
-      :class="{
-        disabled: disabled
-      }"
+      v-if="status === 0"
     >
       <div class="c-btn-content">
         <b-button
           size="sm"
           class="send-btn green"
-          @click="setAssessStatus(4)"
+          @click="setAssessStatus(3)"
           :disabled="disabled"
         >
           <b-icon icon="circle" class="b-icon-sm" aria-hidden="true"></b-icon>
@@ -36,6 +34,20 @@
         </b-button>
       </div>
     </div>
+    <div v-else>
+      <div class="replied-container" v-if="status === 3">
+         <b-icon icon="circle" class="b-icon-sm" aria-hidden="true"></b-icon>
+         <span>買取可能</span>
+      </div>
+      <div class="replied-container" v-if="status === 1">
+         <b-icon icon="question" class="b-icon" aria-hidden="true"></b-icon>
+          <span>不明</span>
+      </div>
+      <div class="replied-container" v-if="status === 2">
+         <b-icon icon="x" class="b-icon" aria-hidden="true"></b-icon>
+          <span>買取不可</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,7 +56,7 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "AssessBtns",
-  props: ["id", "disabled", "props"],
+  props: ["id", "disabled", "props", "status"],
   methods: {
     async setAssessStatus(status) {
       this.$emit("setAssessStatus", this.id, status, this.props);
@@ -53,6 +65,12 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss">
+.c-btn-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .c-btn-container {
   display: flex;
   justify-content: flex-start;
@@ -114,8 +132,12 @@ export default Vue.extend({
   margin-top: 5px;
   margin-bottom: 10px;
 }
-
-.disabled {
-  pointer-events: none;
+.replied-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #17a2b8;
+  flex-direction: column;
+  margin: auto;
 }
 </style>
