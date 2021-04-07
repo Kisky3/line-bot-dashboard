@@ -3,7 +3,7 @@
     <vue-good-table
       :columns="columns"
       :rows="todos"
-      styleClass="vgt-table"
+      styleClass="vgt-table bordered"
       :row-style-class="rowStyleClassFn"
       :sort-options="{
         enabled: false,
@@ -41,24 +41,15 @@
         </div>
         <!--ステータス-->
         <div v-else-if="props.column.field == 'Status'">
-          <div class="status-label red" v-if="props.row.Status === 0">
-            <b-icon
-              icon="exclamation-circle-fill"
-              variant="danger"
-              class="space"
-            ></b-icon
-            >未返信
+          <div class="status-label" v-if="props.row.Status === 0">
+            未返信
           </div>
           <div class="status-label green" v-else>
-            <div class="status-sublabel">
-              <b-icon icon="patch-check-fll" variant="info" class="space"></b-icon
-            >返信済み
-            </div>
-            <span v-if="props.row.Status === 1">{{props.row.UserName + "さんは「買取不明」を返信しました"}}</span>
-            <span v-if="props.row.Status === 2">{{props.row.UserName + "さんは「買取不可」を返信しました"}}</span>
-            <span v-if="props.row.Status === 3">{{props.row.UserName + "さんは「高くフォームを送信」を返信しました"}}</span>
-            <span v-if="props.row.Status === 4">{{props.row.UserName + "さんは「おいくらフォームを送信」を返信しました"}}</span>
+            返信済
           </div>
+            <span class="status-label-reply" v-if="props.row.Status === 1">{{props.row.UserName + "さんは「買取不明」を返信しました"}}</span>
+            <span class="status-label-reply" v-if="props.row.Status === 2">{{props.row.UserName + "さんは「買取不可」を返信しました"}}</span>
+            <span class="status-label-reply" v-if="props.row.Status === 3">{{props.row.UserName + "さんは「高くフォームを送信」を返信しました"}}</span>
         </div>
         <div v-else>{{ props.formattedRow[props.column.field] }}</div>
       </template>
@@ -141,22 +132,22 @@ export default Vue.extend({
           width: "130px"
         },
         {
-          label: "ユーザー",
+          label: "ステータス",
+          field: "Status",
+          type: "number",
+          width: "350px"
+        },
+        {
+          label: "ユーザー名",
           field: "LineUserName",
           type: "string",
           width: "130px"
         },
         {
-          label: "画像 / 査定",
+          label: "画像",
           field: "Images",
           type: "array",
-          width: "380px"
-        },
-        {
-          label: "ステータス",
-          field: "Status",
-          type: "number",
-          width: "130px"
+          width: "250px"
         }
       ]
     };
@@ -209,9 +200,6 @@ export default Vue.extend({
           break;
         case 3:
           assessStatus = "高くフォームを送信";
-          break;
-        case 4:
-          assessStatus = "おいくらフォームを送信";
           break;
       }
 
@@ -269,60 +257,54 @@ export default Vue.extend({
 .table-container {
   color: #606266;
   min-height: 700px;
-  min-width: 1200px;
+  min-width: 1000px;
 }
 .image-container {
+  font-size: 13px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: start;
   border-radius: 5px;
-  border: dotted 3px gainsboro;
 }
 .status-label {
   width: 180px;
-  height: 30px;
-  color: white;
   display: flex;
   justify-content: start;
   align-items: center;
-  margin: auto;
-}
-.status-label.red {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
-  color: #dc3545;
-  background: none;
-  margin-left: -3px;
-}
-
-.status-sublabel {
-  margin-left: -85px;
+  color: #222;
 }
 
 .status-label.green {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   color: #17a2b8;
   background: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 30px;
-  max-width: 180px;
 }
 
-.green > span {
-  font-size: 16px;
-  color: black;
+.vgt-right-align {
+  text-align: left;
+}
+
+.status-label-reply {
+  font-size: 13px;
+  color: #17a2b8!important;
   font-weight: normal;
-  text-align: start;
-  word-wrap:break-word!important;
-  word-break : break-all!important;
 }
 
 .vgt-table {
   background: black;
+  font-size: 13px!important;
+}
+
+.vgt-table th {
+  padding: 0 0 0 14px!important;
+  background: #17a2b8!important;
+  border-top: solid 2px #17a2b8!important;
+  border-left: solid 1px #17a2b8!important;
+  color: white!important;
+  font-size: 13px;
 }
 
 @media (max-width: 576px) {
@@ -335,6 +317,12 @@ table.vgt-table td {
     justify-content: start;
     align-items: center;
 }
+
+table.vgt-left-align {
+  height: 30px;
+  background: red;
+}
+
 .green {
   white-space: nowrap;
   padding-top:0;

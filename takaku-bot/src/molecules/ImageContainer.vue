@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="image-content">
-      <b-icon icon="zoom-in" class="space ex-icon"></b-icon>
       <img
         v-for="(imageUrl, index) in props.row.Images"
         :key="index"

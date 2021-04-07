@@ -22,7 +22,5 @@ export default Vue.extend({
   display: flex;
   justify-content: start;
   align-items: center;
-  margin: 10px;
-  height: 30px;
 }
 </style>

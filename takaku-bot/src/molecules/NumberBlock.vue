@@ -20,8 +20,9 @@ label {
   color: white;
   justify-content: center;
   align-items: center;
-  margin-bottom : 0;
-  padding: 0 20px 0 5px;
+  padding: 8px 35px 8px 10px;
+  background: #17a2b8;
+  margin-top: 10px;
 }
 .number-block {
   display: flex;
@@ -31,7 +32,6 @@ label {
   flex-direction: row;
   font-size: 15px;
   font-weight: bold;
-  margin-right: 20px;
 }
 
 .number {

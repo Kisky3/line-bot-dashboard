@@ -2,12 +2,6 @@
   <div>
     <div class="mask" v-if="showImageSlide" @click="controlSlide"></div>
     <div v-if="showImageSlide" class="dialog">
-      <b-icon
-        icon="x-square-fill"
-        variant="danger"
-        class="close-btn"
-        @click="controlSlide"
-      ></b-icon>
       <b-carousel
         id="carousel-1"
         v-model="slide"

@@ -9,12 +9,22 @@
       <div class="c-btn-content">
         <b-button
           size="sm"
+          variant="warning"
+          class="btn"
+          @click="setAssessStatus(4)"
+          :disabled="disabled"
+        >
+          
+          買取可能
+        </b-button>
+        <b-button
+          size="sm"
           variant="dark"
           class="btn"
           @click="setAssessStatus(1)"
           :disabled="disabled"
         >
-          買取不明
+          不明
         </b-button>
         <b-button
           size="sm"
@@ -24,27 +34,6 @@
           :disabled="disabled"
         >
           買取不可
-        </b-button>
-      </div>
-
-      <div class="c-btn-content">
-        <b-button
-          size="sm"
-          variant="warning"
-          class="btn"
-          @click="setAssessStatus(3)"
-          :disabled="disabled"
-        >
-          高くフォームを送信
-        </b-button>
-        <b-button
-          size="sm"
-          variant="warning"
-          class="btn"
-          @click="setAssessStatus(4)"
-          :disabled="disabled"
-        >
-          おいくらフォームを送信
         </b-button>
       </div>
     </div>
@@ -78,8 +67,9 @@ export default Vue.extend({
 }
 .btn {
   margin: 5px 10px;
-  width: 200px;
-  border-radius: 15px;
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
 }
 
 .btn:hover {
