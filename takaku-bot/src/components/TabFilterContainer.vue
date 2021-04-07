@@ -18,6 +18,7 @@ export default Vue.extend({
   methods: {
     tabFilter(status){
       this.$emit("tabFilter", status);
+      this.store.commit('setTabFilter', status)
     }
   }
 });

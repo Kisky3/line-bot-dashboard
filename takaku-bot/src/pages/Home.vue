@@ -17,8 +17,7 @@
 <script lang="ts">
 import Vue from "vue";
 import RequestTable from "../components/RequestTable.vue";
-import { API, graphqlOperation } from "aws-amplify";
-import { createLineBotRequest } from "../graphql/mutations";
+import { API } from "aws-amplify";
 import { listLineBotRequests } from "../graphql/queries";
 import TabFilterContainer from "../components/TabFilterContainer.vue";
 import Loading from "../components/Loading.vue";
@@ -67,7 +66,7 @@ export default Vue.extend({
       }
       const requests =await API.graphql({
         query: listLineBotRequests,
-        variables: { filter: filter }
+        variables: { filter }
       });
       const dataList = requests.data;
       this.requests = dataList.listLineBotRequests.items;
