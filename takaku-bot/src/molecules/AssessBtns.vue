@@ -91,8 +91,8 @@ export default Vue.extend({
 }
 
 .send-btn.gray {
-  border: solid 1px #343a40;
-  background: #343a40
+  border: solid 1px #484747;
+  background: #484747
 }
 
 .send-btn:hover {
