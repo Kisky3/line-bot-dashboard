@@ -75,8 +75,7 @@ export default Vue.extend({
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition-duration: 5s;
-  transition: linear
+  transition: margin-top 0.15s, box-shadow 0.15s, opacity 0.15s;
 }
 
 .send-btn.green {
