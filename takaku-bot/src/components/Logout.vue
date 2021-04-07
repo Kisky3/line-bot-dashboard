@@ -1,5 +1,5 @@
 <template>
-  <div class="number-block-container">
+  <div class="tab-filter-container">
     <div class="number-block-title">
       {{ username }}さん
     </div>
@@ -56,10 +56,13 @@ export default Vue.extend({
   border: 0;
   color: white;
   width: 100px;
+  margin-top: 5px;
 }
-
-
-.btn:hover {
+.mb-2:hover {
+  background: none;
+  color: #17a2b8;
   opacity: 1;
+  font-weight: bold;
 }
+
 </style>
