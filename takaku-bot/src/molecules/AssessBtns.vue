@@ -14,7 +14,7 @@
           @click="setAssessStatus(4)"
           :disabled="disabled"
         >
-          
+          <b-icon icon="circle" aria-hidden="true"></b-icon>
           買取可能
         </b-button>
         <b-button
@@ -24,6 +24,7 @@
           @click="setAssessStatus(1)"
           :disabled="disabled"
         >
+         <b-icon icon="question" aria-hidden="true"></b-icon>
           不明
         </b-button>
         <b-button
@@ -33,6 +34,7 @@
           @click="setAssessStatus(2)"
           :disabled="disabled"
         >
+          <b-icon icon="x" aria-hidden="true"></b-icon>
           買取不可
         </b-button>
       </div>
@@ -67,9 +69,13 @@ export default Vue.extend({
 }
 .btn {
   margin: 5px 10px;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn:hover {
