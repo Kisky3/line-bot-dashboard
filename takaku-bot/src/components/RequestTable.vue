@@ -198,8 +198,8 @@ export default Vue.extend({
         case 2:
           assessStatus = "買取不可";
           break;
-        case 3:
-          assessStatus = "高くフォームを送信";
+        case 4:
+          assessStatus = "買取可能";
           break;
       }
 
