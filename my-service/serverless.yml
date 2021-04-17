@@ -27,6 +27,14 @@ provider:
   stage: dev
   region: ap-northeast-1 # tokyo
 
+# statements to the Lambda function's IAM Role
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:putObject"
+        - "s3:PutObjectAcl"
+      Resource: "arn:aws:s3:::takakuureru-images/*"
+
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
