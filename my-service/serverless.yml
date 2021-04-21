@@ -33,7 +33,7 @@ provider:
       Action:
         - "s3:putObject"
         - "s3:PutObjectAcl"
-      Resource: "arn:aws:s3:::takakuureru-images/*"
+      Resource: "arn:aws:s3:::takaku-bot-images/*"
 
 # you can overwrite defaults here
 #  stage: dev
