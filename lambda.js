@@ -9,11 +9,12 @@ const client = new line.Client({
   channelAccessToken: process.env.ACCESSTOKEN
 });
 const endpoint = process.env.END_POINT
+
 // 乱数sessionを生成する
 let rString = randomString();
 
 // Line側から来たresを受け取る
-exports.handler = (event, context) => {
+exports.handler = (event) => {
   let body = JSON.parse(event.body);
   const userId = body.events[0].source.userId;
   const message = body.events[0].message;
@@ -66,7 +67,7 @@ exports.handler = (event, context) => {
           // 画像保存後の処理 データの整形とDBに保存する
           getSessionData(userId, rString).then(res => {
               if (Object.keys(res).length) {
-                const images = res.Item.images
+                const images = res.Item.Images
                 if (Object.keys(images).length < 2) {
                   images.push(endpoint + params.Key)
                   updateImage(res.Item.id, images);
@@ -98,7 +99,7 @@ function randomString() {
   return result;
 }
 
-// sessionを利用してデータを取ってくる
+// // sessionを利用してデータを取ってくる
 function getSessionData(userId, rString) {
   const params = {
     TableName: "LineBotRequest-ivsefmvknncc5owyhe5jbzjw7m-dev",
@@ -128,12 +129,12 @@ function updateImage(session, images) {
       id: session,
     },
     ExpressionAttributeNames: {
-      '#images': 'images',
+      '#Images': 'Images',
     },
     ExpressionAttributeValues: {
-      ':images': images
+      ':Images': images
     },
-    UpdateExpression: 'SET #images = :images'
+    UpdateExpression: 'SET #Images = :Images'
   };
   docClient.update(params, function (err, data) {
     if (err) {
