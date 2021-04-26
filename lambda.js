@@ -68,7 +68,7 @@ exports.handler = (event, context) => {
               if (Object.keys(res).length) {
                 const images = res.Item.images
                 if (Object.keys(images).length < 2) {
-                  images.push(params.Key)
+                  images.push(endpoint + params.Key)
                   updateImage(res.Item.id, images);
                   confirmMessage("画像を受領しました！同じお品物の追加画像はございますでしょうか。", "はい", "いいえ", replayToken);
                 } else {
