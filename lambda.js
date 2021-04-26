@@ -153,6 +153,7 @@ function saveSession(imageKey, userId, rString) {
     id: userId + rString,
     userId: userId,
     images: images,
+    LineUserName: userId,
     UserName: "",
     Status: 0,
     updatedAt: "2021-04-30T12:40:21.268166+09:00",

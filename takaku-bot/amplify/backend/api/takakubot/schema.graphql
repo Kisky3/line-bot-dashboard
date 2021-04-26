@@ -3,7 +3,7 @@ type LineBotRequest @model {
   LineID: String!
   UserID: String
   UserName: String
-  LineUserName: String!
+  LineUserName: String
   Images: [String]
   Status: Int
   createdAt: AWSDateTime
