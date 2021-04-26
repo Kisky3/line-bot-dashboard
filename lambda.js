@@ -101,7 +101,7 @@ function randomString() {
 // sessionを利用してデータを取ってくる
 function getSessionData(userId, rString) {
   const params = {
-    TableName: "LinebotUserSession",
+    TableName: "LineBotRequest-ivsefmvknncc5owyhe5jbzjw7m-dev",
     Key: {
       id: userId + rString
     }
@@ -123,7 +123,7 @@ function getSessionData(userId, rString) {
 // sessionを利用して画像リストを更新する
 function updateImage(session, images) {
   const params = {
-    TableName: "LinebotUserSession",
+    TableName: "LineBotRequest-ivsefmvknncc5owyhe5jbzjw7m-dev",
     Key: {
       id: session,
     },
@@ -160,7 +160,7 @@ function saveSession(imageKey, userId, rString) {
     repliedAt: "2021-04-30T12:40:21.268166+09:00"
   };
   const params = {
-    TableName: "LinebotUserSession",
+    TableName: "LineBotRequest-ivsefmvknncc5owyhe5jbzjw7m-dev",
     Item: item
   };
   docClient.put(params, function (err, data) {
