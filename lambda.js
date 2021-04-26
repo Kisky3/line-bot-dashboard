@@ -154,7 +154,12 @@ function saveSession(imageKey, userId, rString) {
   const item = {
     id: userId + rString,
     userId: userId,
-    images: images
+    images: images,
+    UserName: "",
+    Status: 0,
+    updatedAt: "2021-04-30T12:40:21.268166+09:00",
+    createdAt: "2021-04-30T12:40:21.268166+09:00",
+    repliedAt: "2021-04-30T12:40:21.268166+09:00"
   };
   const params = {
     TableName: "LinebotUserSession",
