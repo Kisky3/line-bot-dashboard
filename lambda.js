@@ -148,11 +148,11 @@ function updateImage(session, images) {
 // sessionが存在しない場合はsessionと画像データを一緒にDBに保存する
 function saveSession(imageKey, userId, rString) {
   var images = [];
-  images.push(imageKey);
+  images.push(endpoint + imageKey);
   const item = {
     id: userId + rString,
-    userId: userId,
-    images: images,
+    LineID: userId,
+    Images: images,
     LineUserName: userId,
     UserName: "",
     Status: 0,
