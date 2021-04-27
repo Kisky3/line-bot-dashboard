@@ -62,18 +62,19 @@ exports.handler = (event) => {
           Key: rString + imagesSession + ".jpg",
           Body: Buffer.concat(data)
         };
-
         s3.putObject(params, function (err, data) {
           // 画像保存後の処理 データの整形とDBに保存する
           getSessionData(userId, rString).then(res => {
               if (Object.keys(res).length) {
                 const images = res.Item.Images
-                if (Object.keys(images).length < 2) {
+                if (Object.keys(images).length < 3 ) {
                   images.push(endpoint + params.Key)
                   updateImage(res.Item.id, images);
+                  if (Object.keys(images).length === 3) {
+                    sendMessage("画像は最大3枚でございますので、ありがとうございました！", replayToken);
+                    return
+                  }
                   confirmMessage("画像を受領しました！同じお品物の追加画像はございますでしょうか。", "はい", "いいえ", replayToken);
-                } else {
-                  sendMessage("画像は最大3枚でございますので、ありがとうございました！", replayToken);
                 }
               } else {
                 saveSession(params.Key, userId, rString);
