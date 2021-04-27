@@ -25,6 +25,8 @@ export default Vue.extend({
     for (let i = 1; i < 3; i++) {
       if (images.length < i) {
         images[i] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+        // TODO: serveに上げた後下記に変更する
+        // images[i] = "../assets/noimage.png";
       }
     }
     return {
