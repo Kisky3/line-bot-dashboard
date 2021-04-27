@@ -171,7 +171,7 @@ export default Vue.extend({
     editDate(propDate) {
       const date = propDate.split("T")[0].split("-").join("/");
       const time = propDate.split("T")[1].substr(0, 5);
-      const currentData = `${date}'\xa0\xa0'${time}'\xa0\xa0'` ;
+      const currentData = `${date}\xa0\xa0${time}\xa0\xa0` ;
       return currentData
     },
     rowStyleClassFn(row) {
