@@ -2,14 +2,14 @@
   <div>
     <div class="image-content">
       <img
-        v-for="(imageUrl, index) in props.row.Images"
+        v-for="(imageUrl, index) in imageList"
         :key="index"
         :src="imageUrl"
         class="image"
         @click="largeImage(index, props)"
         v-b-tooltip.hover
         title="クリックして画像を拡大する"
-      >
+      />
     </div>
   </div>
 </template>
@@ -20,6 +20,17 @@ import Vue from "vue";
 export default Vue.extend({
   name: "ImageContainer",
   props: ["props"],
+  data() {
+    const images = this.props.row.Images;
+    for (let i = 1; i < 3; i++) {
+      if (images.length < i) {
+        images[i] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+      }
+    }
+    return {
+      imageList: images
+    };
+  },
   methods: {
     largeImage(index, props) {
       this.$emit("largeImage", index, props);
@@ -50,6 +61,6 @@ export default Vue.extend({
 
 .ex-icon {
   color: #999;
-  margin:0 -5px 0 5px;
+  margin: 0 -5px 0 5px;
 }
 </style>
