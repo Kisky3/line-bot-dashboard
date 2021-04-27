@@ -100,7 +100,7 @@ function randomString() {
   return result;
 }
 
-// // sessionを利用してデータを取ってくる
+// sessionを利用してデータを取ってくる
 function getSessionData(userId, rString) {
   const params = {
     TableName: "LineBotRequest-ivsefmvknncc5owyhe5jbzjw7m-dev",
