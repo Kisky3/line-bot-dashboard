@@ -5,6 +5,7 @@ AWS.config.update({region: 'ap-northeast-1'});
 const s3 = new AWS.S3({apiVersion: "2006-03-01"});
 const docClient = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 const line = require("@line/bot-sdk");
+const fs = require('fs');
 const client = new line.Client({
   channelAccessToken: process.env.ACCESSTOKEN
 });
@@ -56,11 +57,15 @@ exports.handler = (event) => {
         sendMessage("画像送信失敗しました！", replayToken);
       }).on("end", function () {
         let imagesSession = randomString();
+        const fileName = rString + imagesSession + ".png";
+        
+        // Read content from the file
+        const fileContent = fs.readFileSync(fileName);
 
         const params = {
           Bucket: process.env.S3_BUCKET_NAME,
-          Key: rString + imagesSession + ".jpg",
-          Body: Buffer.concat(data)
+          Key: rString + imagesSession + ".png",
+          Body: fileContent
         };
         s3.putObject(params, function (err, data) {
           // 画像保存後の処理 データの整形とDBに保存する
