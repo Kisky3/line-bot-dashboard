@@ -89,49 +89,6 @@ exports.handler = event => {
         });
       });
     });
-
-    // // Request Headers
-    // const send_options = {
-    //   host: "api.line.me",
-    //   url: `https://api.line.me/v2/bot/message/${message_id}/content`,
-    //   // path: "/v2/bot/message/" + message_id + "/content",
-    //   headers: {
-    //     "Content-type": "application/json; charset=UTF-8",
-    //     Authorization: " Bearer " + process.env.ACCESSTOKEN
-    //   },
-    //   encoding: null,
-    //   method: "GET"
-    // };
-    // APIリクエスト
-    // const req = https.request(send_options, function (res) {
-    //     const data = [];
-    //     res.on("data", function (chunk) {
-    //         console.log("chunkchunkchunkchunkchunkchunkchunkchunkchunkchunkchunk");
-    //         console.log(chunk);
-    //         //image data dividing it in to multiple request
-    //         data.push(new Buffer(chunk));
-    //     }).on("error", function (err) {
-    //         console.log(err);
-    //         sendMessage("画像送信失敗しました！", replayToken);
-    //     }).on("end", function () {
-    //         let imagesSession = randomString();
-
-    //         const params = {
-    //             Bucket: process.env.S3_BUCKET_NAME,
-    //             Key: rString + imagesSession + ".png",
-    //             Body: Buffer.concat(data)
-    //         };
-
-    //         console.log("画像画像画像画像画像画像画像画像画像画像");
-    //         console.log(Buffer.concat(data));
-
-    //         s3.putObject(params, function (err, data) {
-    //             // 画像保存後の処理 データの整形とDBに保存する
-    //
-    //         });
-    //     });
-    // });
-    // req.end();
   }
 };
 
