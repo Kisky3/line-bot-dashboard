@@ -35,7 +35,7 @@
         </div>
         <!--画像 / 査定-->
         <div v-else-if="props.column.field == 'Images'" class="image-container">
-          <image-container :props="props" @largeImage="largeImage" />
+          <image-container :props="props" :imageLists="editImageLists(props.row.Images)" @largeImage="largeImage" />
           <assess-btns
             :id="props.row.id"
             @setAssessStatus="setAssessStatus"
@@ -167,6 +167,23 @@ export default Vue.extend({
       this.props = props;
       this.num = num;
       this.showImageSlide = true;
+    },
+    editImageLists(images) {
+      if (images.length === 0) {
+      images[0] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+      images[1] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+      images[2] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+    }
+
+    if (images.length === 1) {
+      images[1] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+      images[2] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+    }
+
+    if (images.length === 2) {
+      images[2] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+    }
+    return images
     },
     editDate(propDate) {
       const date = propDate.split("T")[0].split("-").join("/");

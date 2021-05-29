@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-takakubot-dev-04924-authRole",
+      "UnauthRoleArn": "arn:aws:iam::699085892706:role/amplify-takakubot-dev-04924-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::699085892706:role/amplify-takakubot-dev-04924-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-takakubot-dev-04924-deployment",
+      "UnauthRoleName": "amplify-takakubot-dev-04924-unauthRole",
+      "StackName": "amplify-takakubot-dev-04924",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:699085892706:stack/amplify-takakubot-dev-04924/ccb813c0-2f35-11eb-bfa2-0693e1093a2e",
+      "AmplifyAppId": "d291pyjz0zpcpd"
+    },
+    "categories": {
+      "auth": {
+        "takakubotfd87c06e": {}
+      }
+    }
+  }
+}

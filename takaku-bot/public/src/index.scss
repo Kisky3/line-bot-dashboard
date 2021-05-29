@@ -1,0 +1,16 @@
+:root {
+    --amplify-background-color: rgb(220, 220, 220, 0.5);
+    --amplify-primary-color:  hsl(188, 78%, 41%);
+    --amplify-primary-tint: none;
+    --amplify-primary-shade: none;
+    --amplify-primary-padding: 1px;
+    --amplify-primary-contrast: white;
+}
+
+.space {
+    margin-right: 5px;
+}
+
+.vgt-table thead th {
+  text-align: left;
+}

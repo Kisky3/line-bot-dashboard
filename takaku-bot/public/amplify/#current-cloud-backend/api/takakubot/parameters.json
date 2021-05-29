@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "takakubot",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authtakakubotfd87c06e",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

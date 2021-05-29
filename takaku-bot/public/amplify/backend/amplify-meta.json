@@ -1,0 +1,62 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-takakubot-dev-04924-authRole",
+      "UnauthRoleArn": "arn:aws:iam::699085892706:role/amplify-takakubot-dev-04924-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::699085892706:role/amplify-takakubot-dev-04924-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-takakubot-dev-04924-deployment",
+      "UnauthRoleName": "amplify-takakubot-dev-04924-unauthRole",
+      "StackName": "amplify-takakubot-dev-04924",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:699085892706:stack/amplify-takakubot-dev-04924/ccb813c0-2f35-11eb-bfa2-0693e1093a2e",
+      "AmplifyAppId": "d291pyjz0zpcpd"
+    }
+  },
+  "api": {
+    "takakubot": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authtakakubotfd87c06e"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "ivsefmvknncc5owyhe5jbzjw7m",
+        "GraphQLAPIEndpointOutput": "https://dftnrbfj25hx7mtmesonygvyuy.appsync-api.ap-northeast-1.amazonaws.com/graphql"
+      },
+      "lastPushTimeStamp": "2021-04-07T13:40:17.004Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-takakubot-dev-04924-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apitakakubot"
+      },
+      "lastPushDirHash": "Hp/an9XTMJJF2tskndvRcrPBP2s="
+    }
+  },
+  "auth": {
+    "takakubotfd87c06e": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "UserPoolId": "ap-northeast-1_kTRISXh9H",
+        "AppClientIDWeb": "39ptbstfi6u9p6784torpvo1dm",
+        "AppClientID": "3cb8lasags2ahmqba723qvcmkr",
+        "IdentityPoolId": "ap-northeast-1:489206ab-3ae7-4e93-b899-d10d927ebdb6",
+        "IdentityPoolName": "takakubotfd87c06e_identitypool_fd87c06e__dev",
+        "UserPoolName": "takakubotfd87c06e_userpool_fd87c06e"
+      },
+      "lastPushTimeStamp": "2021-04-07T13:40:17.006Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-takakubot-dev-04924-deployment/amplify-cfn-templates/auth/takakubotfd87c06e-cloudformation-template.yml",
+        "logicalId": "authtakakubotfd87c06e"
+      },
+      "lastPushDirHash": "tJZYyE8LQ+pO0h26ZWX7otrg7wM="
+    }
+  }
+}

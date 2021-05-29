@@ -51,19 +51,30 @@ export default Vue.extend({
       this.caculateRequestNumbers(this.requests);
       this.showLoading = false;
     },
-    async tabFilter(value){
+    async tabFilter(status){
       this.showLoading = true;
       //すべて
-      if(value === undefined) {
+      if(status === undefined) {
         this.getRequests();
         return
       }
       //すべて以外の場合はfilterでstatusを設定して取得する
-      const filter = {
-        Status: {
-        eq: value
+      let filter = {}
+
+      if (status === 0) {
+        filter = {
+          Status: {
+            eq: 0
+          }
+        }
+      } else {
+        filter = {
+          Status: {
+            ne: 0
+          }
         }
       }
+
       const requests =await API.graphql({
         query: listLineBotRequests,
         variables: { filter }

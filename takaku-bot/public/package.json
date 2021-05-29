@@ -1,0 +1,64 @@
+{
+  "name": "linebot",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "eslint --ext .js,.vue src",
+    "lint:fix": "eslint --fix --ext .js,.vue src"
+  },
+  "dependencies": {
+    "@aws-amplify/ui-vue": "^0.2.26",
+    "aws-amplify": "^3.3.7",
+    "aws-amplify-vue": "^2.1.3",
+    "bootstrap": "^4.5.3",
+    "bootstrap-vue": "^2.18.1",
+    "core-js": "^3.6.5",
+    "vue": "^2.6.12",
+    "vue-good-table": "^2.21.1",
+    "vue-router": "^3.4.9",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-helper-vue-jsx-merge-props": "^2.0.3",
+    "babel-plugin-istanbul": "^5.1.0",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "eslint": "^5.12.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^5.1.0",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^10.0.5",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
