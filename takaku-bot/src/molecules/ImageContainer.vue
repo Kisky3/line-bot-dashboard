@@ -20,36 +20,6 @@ import Vue from "vue";
 export default Vue.extend({
   name: "ImageContainer",
   props: ["props"],
-  
-  // computed: {
-  //   imageLists:() => {
-  //     const images = this.props.row.Images;
-  //     alert(this.props.row.Images);
-  //     // TODO: serveに上げた後下記に変更する
-  //     // images[i] = "../assets/noimage.png";
-  //     if (images.length === 0) {
-  //       images[0] =
-  //         "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-  //       images[1] =
-  //         "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-  //       images[2] =
-  //         "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-  //     }
-
-  //     if (images.length === 1) {
-  //       images[1] =
-  //         "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-  //       images[2] =
-  //         "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-  //     }
-
-  //     if (images.length === 2) {
-  //       images[2] =
-  //         "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-  //     }
-  //     return images;
-  //   }
-  // },
   methods: {
     largeImage(index, props) {
       this.$emit("largeImage", index, props);
