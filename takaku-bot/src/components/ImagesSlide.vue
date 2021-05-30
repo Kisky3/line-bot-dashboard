@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div class="mask" v-if="showImageSlide" @click="controlSlide"></div>
+    <div class="mask" v-if="showImageSlide" @click="controlSlide">
+    </div>
     <div v-if="showImageSlide" class="dialog">
+      <span class="c-modal-close_button" @click="controlSlide"></span>
       <b-carousel
         id="carousel-1"
         v-model="slide"
@@ -63,18 +65,28 @@ export default Vue.extend({
   z-index: 1041;
 }
 
+.dialog > span:hover {
+  color: rgb(255 255 255 / 0.9);
+  cursor: pointer;
+}
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   width: 50px;
   height: 50px;
 }
 
-.close-btn {
-  color: gray;
-  font-size: 40px;
+.c-modal-close_button::before {
+   content: "\00D7";
+}
+
+.c-modal-close_button {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  right: 20px;
+  font-size: 65px;
+  color: rgb(255 255 255 / 0.6);
   z-index: 1001;
+  font-weight: bold;
+  top: -15px;
 }
 </style>
