@@ -35,7 +35,11 @@
         </div>
         <!--画像 / 査定-->
         <div v-else-if="props.column.field == 'Images'" class="image-container">
-          <image-container :props="props" :imageLists="editImageLists(props.row.Images)" @largeImage="largeImage" />
+          <image-container
+            :props="props"
+            :imageLists="editImageLists(props.row.Images)"
+            @largeImage="largeImage"
+          />
           <assess-btns
             :id="props.row.id"
             @setAssessStatus="setAssessStatus"
@@ -51,9 +55,21 @@
           <div class="status-label green" v-else>
             返信済
           </div>
-            <span class="status-label-reply" v-if="props.row.Status === 1">{{editDate(props.row.repliedAt) + props.row.UserName + "さんは「買取不明」を返信しました。"}}</span>
-            <span class="status-label-reply" v-if="props.row.Status === 2">{{editDate(props.row.repliedAt) + props.row.UserName + "さんは「買取不可」を返信しました。"}}</span>
-            <span class="status-label-reply" v-if="props.row.Status === 3">{{editDate(props.row.repliedAt) + props.row.UserName + "さんは「買取可能」を返信しました。"}}</span>
+          <span class="status-label-reply" v-if="props.row.Status === 1">{{
+            editDate(props.row.repliedAt) +
+              props.row.UserName +
+              "さんは「買取不明」を返信しました。"
+          }}</span>
+          <span class="status-label-reply" v-if="props.row.Status === 2">{{
+            editDate(props.row.repliedAt) +
+              props.row.UserName +
+              "さんは「買取不可」を返信しました。"
+          }}</span>
+          <span class="status-label-reply" v-if="props.row.Status === 3">{{
+            editDate(props.row.repliedAt) +
+              props.row.UserName +
+              "さんは「買取可能」を返信しました。"
+          }}</span>
         </div>
         <div v-else>{{ props.formattedRow[props.column.field] }}</div>
       </template>
@@ -105,6 +121,11 @@ import ConfirmDialog from "../molecules/ConfirmDialog.vue";
 import { updateLineBotRequest } from "../graphql/mutations";
 import { API, graphqlOperation, Auth } from "aws-amplify";
 import { getLineBotRequest } from "../graphql/queries";
+// import config from "../assets/config";
+import axios from "axios";
+axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8';
+axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 
 export default Vue.extend({
   name: "RequestTable",
@@ -170,26 +191,35 @@ export default Vue.extend({
     },
     editImageLists(images) {
       if (images.length === 0) {
-      images[0] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-      images[1] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-      images[2] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-    }
+        images[0] =
+          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+        images[1] =
+          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+        images[2] =
+          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+      }
 
-    if (images.length === 1) {
-      images[1] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-      images[2] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-    }
+      if (images.length === 1) {
+        images[1] =
+          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+        images[2] =
+          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+      }
 
-    if (images.length === 2) {
-      images[2] = "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
-    }
-    return images
+      if (images.length === 2) {
+        images[2] =
+          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+      }
+      return images;
     },
     editDate(propDate) {
-      const date = propDate.split("T")[0].split("-").join("/");
+      const date = propDate
+        .split("T")[0]
+        .split("-")
+        .join("/");
       const time = propDate.split("T")[1].substr(0, 5);
-      const currentData = `${date}\xa0\xa0${time}\xa0\xa0` ;
-      return currentData
+      const currentData = `${date}\xa0\xa0${time}\xa0\xa0`;
+      return currentData;
     },
     rowStyleClassFn(row) {
       return row.Status !== 0 ? "info" : "";
@@ -240,18 +270,32 @@ export default Vue.extend({
     },
     async sendMessage() {
       //TODO:Connect Lambda passing id and status
-      const sendStatus = true;
-      try {
-        //Statusと操作ユーザー情報を更新する
-        if (sendStatus) {
-          this.updateStatusAndUser(this.id, this.status).then(() => {
-            // 画面リロードする
-            this.$router.go(0);
-          });
-        }
-      } catch (e) {
-        alert(e.error);
-      }
+      const endpoint =
+        "";
+      const payload = {
+        userId: this.id,
+        status: this.status
+      };
+      axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+      axios
+        .post(endpoint, payload)
+        .then((res) => {
+          // eslint-disable-next-line no-console
+          console.log(res);
+          const sendStatus = true;
+          try {
+            //Statusと操作ユーザー情報を更新する
+            if (sendStatus) {
+              this.updateStatusAndUser(this.id, this.status).then(() => {
+                // 画面リロードする
+                this.$router.go(0);
+              });
+            }
+          } catch (e) {
+            alert(e.error);
+          }
+        })
+        .catch();
     },
     async updateStatusAndUser(id, status) {
       const cognitoUser = await Auth.currentAuthenticatedUser();
@@ -316,47 +360,47 @@ export default Vue.extend({
 
 .status-label-reply {
   font-size: 13px;
-  color: #17a2b8!important;
+  color: #17a2b8 !important;
   font-weight: normal;
 }
 
 .vgt-table {
   background: black;
-  font-size: 13px!important;
+  font-size: 13px !important;
 }
 
 .vgt-table th {
-  padding: 0 0 0 14px!important;
-  background: #17a2b8!important;
-  border-top: solid 2px #17a2b8!important;
-  border-left: solid 1px #17a2b8!important;
-  color: white!important;
+  padding: 0 0 0 14px !important;
+  background: #17a2b8 !important;
+  border-top: solid 2px #17a2b8 !important;
+  border-left: solid 1px #17a2b8 !important;
+  color: white !important;
   font-size: 13px;
 }
 
 @media (max-width: 576px) {
-table.vgt-table td {
-  padding: .75em .75em .75em .75em;
+  table.vgt-table td {
+    padding: 0.75em 0.75em 0.75em 0.75em;
     vertical-align: top;
     border-bottom: 1px solid #dcdfe6;
     color: #606266;
     display: flex;
     justify-content: start;
     align-items: center;
-}
+  }
 
-table.vgt-left-align {
-  height: 30px;
-  background: red;
-}
+  table.vgt-left-align {
+    height: 30px;
+    background: red;
+  }
 
-.green {
-  white-space: nowrap;
-  padding-top:0;
-}
+  .green {
+    white-space: nowrap;
+    padding-top: 0;
+  }
 
-.image-container {
-  flex-direction: column;
-}
+  .image-container {
+    flex-direction: column;
+  }
 }
 </style>
