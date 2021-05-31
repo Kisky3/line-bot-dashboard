@@ -85,7 +85,3 @@ yarn lint
 
 ## Customize configuration
 See Configuration Reference.
-
-## テストユーザー情報
-
-
