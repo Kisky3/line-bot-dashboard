@@ -121,7 +121,6 @@ import ConfirmDialog from "../molecules/ConfirmDialog.vue";
 import { updateLineBotRequest } from "../graphql/mutations";
 import { API, graphqlOperation, Auth } from "aws-amplify";
 import { getLineBotRequest } from "../graphql/queries";
-// import config from "../assets/config";
 import axios from "axios";
 
 export default Vue.extend({
@@ -188,6 +187,7 @@ export default Vue.extend({
     },
     editImageLists(images) {
       if (images.length === 0) {
+        // TODO: configにまとめる
         images[0] =
           "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
         images[1] =
@@ -266,29 +266,38 @@ export default Vue.extend({
       this.$refs.controlDialog.showModal();
     },
     async sendMessage() {
-      //TODO:Connect Lambda passing id and status
+      // TODO: configにまとめる
       const endpoint =
         "https://ehwcchjqyl.execute-api.ap-northeast-1.amazonaws.com/prod";
-      const payload = {
-        lineId: this.id,
+      const params = {
+        lineId: this.id.substr(0, this.id.length - 32),
         status: this.status
       };
+
+
+      // まとめて送信と更新処理
+      await Promise.all(
+        [
+          this.sendInfoToLambda(endpoint, params),
+          this.updateStatusAndUser(this.id, this.status)
+        ].filter((p) => p)
+      ).then(async () => {
+        // 画面リロードする
+        this.$router.go(0);
+      });
+    },
+    async sendInfoToLambda(endpoint, params) {
       axios
-        .get(endpoint)
-        .then((res) => {
-          // eslint-disable-next-line no-console
-          console.log(res);
-          const sendStatus = true;
-          try {
-            //Statusと操作ユーザー情報を更新する
-            if (sendStatus) {
-              this.updateStatusAndUser(this.id, this.status).then(() => {
-                // 画面リロードする
-                this.$router.go(0);
-              });
-            }
-          } catch (e) {
-            alert(e.error);
+        .get(endpoint, { params })
+        .then(function(res) {
+          if (res.status === 200) {
+            return true;
+          } else {
+            this.dialogType = "alert";
+            this.dialogTitle = "エラーが発生しました。";
+            this.dialogContent =
+              "何らかの原因で返信失敗しました。SD部に連絡してください。";
+            this.$refs.controlDialog.showModal();
           }
         })
         .catch();
