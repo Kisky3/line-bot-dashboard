@@ -123,9 +123,6 @@ import { API, graphqlOperation, Auth } from "aws-amplify";
 import { getLineBotRequest } from "../graphql/queries";
 // import config from "../assets/config";
 import axios from "axios";
-axios.defaults.baseURL = 'http://localhost:8080';
-axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8';
-axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 
 export default Vue.extend({
   name: "RequestTable",
@@ -271,14 +268,13 @@ export default Vue.extend({
     async sendMessage() {
       //TODO:Connect Lambda passing id and status
       const endpoint =
-        "";
+        "https://ehwcchjqyl.execute-api.ap-northeast-1.amazonaws.com/prod";
       const payload = {
-        userId: this.id,
+        lineId: this.id,
         status: this.status
       };
-      axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
       axios
-        .post(endpoint, payload)
+        .get(endpoint)
         .then((res) => {
           // eslint-disable-next-line no-console
           console.log(res);
