@@ -189,23 +189,23 @@ export default Vue.extend({
       if (images.length === 0) {
         // TODO: configにまとめる
         images[0] =
-          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+          "https://www.to-conne.co.jp/dcms_media/image/NoImage.jpg";
         images[1] =
-          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+          "https://www.to-conne.co.jp/dcms_media/image/NoImage.jpg";
         images[2] =
-          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+          "https://www.to-conne.co.jp/dcms_media/image/NoImage.jpg";
       }
 
       if (images.length === 1) {
         images[1] =
-          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+          "https://www.to-conne.co.jp/dcms_media/image/NoImage.jpg";
         images[2] =
-          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+          "https://www.to-conne.co.jp/dcms_media/image/NoImage.jpg";
       }
 
       if (images.length === 2) {
         images[2] =
-          "https://kameyama-grp.co.jp/kss-ss/wp-content/uploads/2020/01/l_e_others_500.png";
+          "https://www.to-conne.co.jp/dcms_media/image/NoImage.jpg";
       }
       return images;
     },
@@ -271,9 +271,8 @@ export default Vue.extend({
         "https://ehwcchjqyl.execute-api.ap-northeast-1.amazonaws.com/prod";
       const params = {
         lineId: this.id.substr(0, this.id.length - 32),
-        status: this.status
+        status: Number(this.status)
       };
-
 
       // まとめて送信と更新処理
       await Promise.all(

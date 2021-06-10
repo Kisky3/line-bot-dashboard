@@ -1,8 +1,6 @@
 <template>
   <div class="number-block">
-     <label v-on:click="tabFilter()" :class="{'active': active}">
-      {{ label }} ({{ number }})
-    </label>
+    <label v-on:click="tabFilter()" :class="{'active': active}">{{ label }} ({{ number }})</label>
   </div>
 </template>
 
@@ -16,8 +14,7 @@ export default Vue.extend({
     tabFilter() {
       this.$emit("tabFilter");
     }
-  },
-
+  }
 });
 </script>
 <style>
@@ -26,13 +23,19 @@ label {
   color: white;
   justify-content: center;
   align-items: center;
-  padding: 8px 35px 8px 10px;
+  padding: 6px 35px 6px 35px;
   background: #343a40;
-  margin-top: 10px;
+  margin-top: 8px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: solid 1px #dcdfe6;
+  border-right: solid 1px #dcdfe6;
+  transition: border-right 0.05s;
 }
 label:hover {
   cursor: pointer;
   background: #17a2b8;
+  border-right: solid 1px #17a2b8;
 }
 .active {
   background: #17a2b8;

@@ -3,7 +3,7 @@
     <b-modal ref="my-modal" class="alert" hide-footer>
       <div class="d-block text-center">
         <h3>{{ title }}</h3>
-        <p class="mb-3">{{ content }}</p>
+        <p class="mb-3" style="word-wrap: break-word">{{ content }}</p>
         <slot />
       </div>
       <b-button
@@ -43,7 +43,7 @@ export default Vue.extend({
 </script>
 <style>
 .modal-dialog {
-  width: 400px;
+  width: 480px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -57,5 +57,9 @@ export default Vue.extend({
 
 .d-block > p {
   font-size: 20px;
+}
+
+.mb-3 {
+  word-wrap: break-word!important;
 }
 </style>
