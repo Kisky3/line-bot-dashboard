@@ -104,6 +104,8 @@ export default Vue.extend({
   margin-bottom: auto;
   background: #343a40;
   height: 35px;
+  width: 960px;
   border-bottom: solid 1px #dcdfe6;
+  margin: auto;
 }
 </style>

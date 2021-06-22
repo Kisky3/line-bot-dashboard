@@ -31,7 +31,7 @@ export default Vue.extend({
 .image {
   width: 80px;
   height: 80px;
-  margin: 0 15px;
+  margin: 0 10px;
   object-fit: cover;
   box-shadow: 1px 1px 5px #999;
   cursor: pointer;

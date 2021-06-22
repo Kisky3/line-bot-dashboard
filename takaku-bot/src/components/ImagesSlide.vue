@@ -17,7 +17,7 @@
         <div v-for="img in images" :key="img">
           <b-carousel-slide
             :img-src="img"
-            style="width: 600px; height: 600px; object-fit: cover;"
+            style="width: 100%; height: 100%; min-width: 600px; min-height: 600px;"
           ></b-carousel-slide>
         </div>
       </b-carousel>

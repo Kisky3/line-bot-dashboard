@@ -26,7 +26,8 @@ export default Vue.extend({
   background: #fff;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 960px;
+  margin: auto;
   height: 30px;
   border-bottom: 1px solid rgba(220, 220, 220, 0.1);
   display: flex;

@@ -6,8 +6,8 @@
       styleClass="vgt-table bordered"
       :row-style-class="rowStyleClassFn"
       :sort-options="{
-        enabled: false,
-        initialSortBy: { field: 'Status', type: 'asc' }
+        enabled: true,
+        initialSortBy: { field: 'createdAt', type: 'desc' }
       }"
       :pagination-options="{
         enabled: true,
@@ -30,8 +30,8 @@
       <div slot="emptystate">データは存在しません</div>
       <template slot="table-row" slot-scope="props">
         <!--登録日時-->
-        <div v-if="props.column.field == 'createdAt'">
-          {{ editDate(props.row.createdAt) }}
+        <div v-if="props.column.field == 'createdAt'" class="table-field">
+          {{ editDate(props.row.createdAt, "createdAt") }}
         </div>
         <!--画像 / 査定-->
         <div v-else-if="props.column.field == 'Images'" class="image-container">
@@ -48,43 +48,43 @@
           />
         </div>
         <!--ステータス-->
-        <div v-else-if="props.column.field == 'Status'">
-          <div class="status-label" v-if="props.row.Status === 0">
+        <div v-else-if="props.column.field == 'Status'" class="table-field-mid">
+          <div class="status-label no-wrap" v-if="props.row.Status === 0">
             未返信
           </div>
-          <div class="status-label green" v-else>
+          <div class="status-label green no-wrap" v-else>
             返信済
           </div>
           <span class="status-label-reply" v-if="props.row.Status === 1">{{
-            editDate(props.row.repliedAt) +
+            editDate(props.row.repliedAt, "repliedAt") +
               props.row.UserName +
               "さんは「買取不明」を返信しました。"
           }}</span>
           <span class="status-label-reply" v-if="props.row.Status === 2">{{
-            editDate(props.row.repliedAt) +
+            editDate(props.row.repliedAt, "repliedAt") +
               props.row.UserName +
               "さんは「買取不可」を返信しました。"
           }}</span>
           <span class="status-label-reply" v-if="props.row.Status === 3">{{
-            editDate(props.row.repliedAt) +
+            editDate(props.row.repliedAt, "repliedAt") +
               props.row.UserName +
               "さんは「買取可能」を返信しました。"
           }}</span>
         </div>
-        <div v-else>{{ props.formattedRow[props.column.field] }}</div>
+        <div v-else class="table-field">{{ props.formattedRow[props.column.field] }}</div>
       </template>
       <!-- カラムHeaderの表示設定 -->
       <template slot="table-column" slot-scope="props">
-        <span v-if="props.column.label == 'LineID'">
+        <span v-if="props.column.label == 'LineID'" class="table-field">
           {{ props.column.label }}
         </span>
-        <span v-else-if="props.column.label == 'ユーザー名'">
+        <span v-else-if="props.column.label == 'ユーザー名'" class="table-field">
           {{ props.column.label }}
         </span>
         <span v-else-if="props.column.label == '画像 / 査定'">
           {{ props.column.label }}
         </span>
-        <span v-else>
+        <span v-else class="table-field">
           {{ props.column.label }}
         </span>
       </template>
@@ -150,25 +150,21 @@ export default Vue.extend({
           label: "登録日時",
           field: "createdAt",
           type: "string",
-          width: "130px"
         },
         {
           label: "ステータス",
           field: "Status",
           type: "number",
-          width: "350px"
         },
         {
           label: "ユーザー名",
           field: "LineUserName",
           type: "string",
-          width: "130px"
         },
         {
           label: "画像",
           field: "Images",
           type: "array",
-          width: "250px"
         }
       ]
     };
@@ -209,13 +205,20 @@ export default Vue.extend({
       }
       return images;
     },
-    editDate(propDate) {
+    editDate(propDate, type) {
+      if (propDate === null) return "";
       const date = propDate
         .split("T")[0]
         .split("-")
         .join("/");
       const time = propDate.split("T")[1].substr(0, 5);
-      const currentData = `${date}\xa0\xa0${time}\xa0\xa0`;
+
+      let currentData
+      if (type === "createdAt") {
+        currentData = propDate === null ? '' : `${date}\xa0\xa0\xa0\xa0\xa0\xa0${time}\xa0\xa0`;
+      } else {
+        currentData = propDate === null ? '' : `${date}\xa0\xa0${time}\xa0\xa0`;
+      }
       return currentData;
     },
     rowStyleClassFn(row) {
@@ -266,12 +269,16 @@ export default Vue.extend({
       this.$refs.controlDialog.showModal();
     },
     async sendMessage() {
+      const date = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000));
+      const currentDate = date.toISOString();
+
       // TODO: configにまとめる
       const endpoint =
-        "https://ehwcchjqyl.execute-api.ap-northeast-1.amazonaws.com/prod";
+        "";
       const params = {
         lineId: this.id.substr(0, this.id.length - 32),
-        status: Number(this.status)
+        status: Number(this.status),
+        repliedAt: currentDate
       };
 
       // まとめて送信と更新処理
@@ -331,8 +338,20 @@ export default Vue.extend({
 }
 .table-container {
   color: #606266;
+  width: 960px !important;
   min-height: 700px;
-  min-width: 1000px;
+  margin: auto;
+}
+.table-field {
+  width: 95px !important;
+  word-wrap:break-word;
+}
+.table-field-mid {
+  width: 115px !important;
+  word-wrap:break-word;
+}
+.no-wrap {
+  white-space:nowrap;
 }
 .image-container {
   font-size: 13px;
@@ -342,7 +361,7 @@ export default Vue.extend({
   border-radius: 5px;
 }
 .status-label {
-  width: 180px;
+  width: 0px;
   display: flex;
   justify-content: start;
   align-items: center;
