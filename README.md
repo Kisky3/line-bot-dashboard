@@ -3,6 +3,8 @@
 
 
 # System Architecture
+<img width="587" alt="スクリーンショット 2021-11-04 21 45 33" src="https://user-images.githubusercontent.com/23165804/140316305-5d842bcd-c00a-4d04-a16f-e86932e28591.png">
+
 ## [Login] <br/>
 <img width="551" alt="スクリーンショット 2021-09-16 18 16 31" src="https://user-images.githubusercontent.com/23165804/133585773-fbe92e88-b751-43f2-8c02-86c6747c42ed.png">
 
